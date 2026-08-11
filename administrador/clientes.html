@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Clientes | Administrador
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="estilos_admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-container">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+
+            <h2>CHAMAQUITOS</h2>
+
+            <span>
+                Panel de administración
+            </span>
+
+        </div>
+
+
+        <nav class="admin-menu">
+
+            <a href="panel.html">
+
+                <span>📊</span>
+
+                Panel principal
+
+            </a>
+
+
+            <a href="productos.html">
+
+                <span>📦</span>
+
+                Productos
+
+            </a>
+
+
+            <a href="pedidos.html">
+
+                <span>🛒</span>
+
+                Pedidos
+
+            </a>
+
+
+            <a href="ventas.html">
+
+                <span>📊</span>
+
+                Ventas
+
+            </a>
+
+
+            <a
+                href="clientes.html"
+                class="active"
+            >
+
+                <span>👥</span>
+
+                Clientes
+
+            </a>
+
+
+            <a href="configuracion.html">
+
+                <span>⚙️</span>
+
+                Configuración
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/Inicio.html">
+
+                ← Ver tienda
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- =====================================
+             ENCABEZADO
+        ====================================== -->
+
+        <header class="admin-header">
+
+            <div>
+
+                <span class="admin-eyebrow">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Clientes
+                </h1>
+
+                <p>
+                    Consultá y administrá los clientes de tu tienda.
+                </p>
+
+            </div>
+
+
+            <div class="admin-header-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnActualizarClientes"
+                >
+
+                    ↻
+                    Actualizar
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             RESUMEN
+        ====================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Total de clientes
+                </span>
+
+                <strong id="totalClientes">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Nuevos clientes
+                </span>
+
+                <strong id="clientesNuevos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Clientes con pedidos
+                </span>
+
+                <strong id="clientesConPedidos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Clientes frecuentes
+                </span>
+
+                <strong id="clientesFrecuentes">
+                    0
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             FILTROS
+        ====================================== -->
+
+        <section class="admin-filters">
+
+
+            <div class="filter-group">
+
+                <label for="buscarCliente">
+
+                    Buscar
+
+                </label>
+
+                <input
+                    type="search"
+                    id="buscarCliente"
+                    placeholder="Nombre, teléfono o email..."
+                >
+
+            </div>
+
+
+
+            <div class="filter-group">
+
+                <label for="filtroClienteActividad">
+
+                    Actividad
+
+                </label>
+
+                <select id="filtroClienteActividad">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="nuevo">
+                        Nuevos
+                    </option>
+
+                    <option value="con-pedidos">
+                        Con pedidos
+                    </option>
+
+                    <option value="frecuente">
+                        Frecuentes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="filter-group">
+
+                <label for="filtroClientePedidos">
+
+                    Pedidos
+
+                </label>
+
+                <select id="filtroClientePedidos">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="1">
+                        1 pedido
+                    </option>
+
+                    <option value="2">
+                        2 pedidos
+                    </option>
+
+                    <option value="3">
+                        3 o más pedidos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             LISTADO DE CLIENTES
+        ====================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        CLIENTES
+                    </span>
+
+                    <h2>
+                        Clientes registrados
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table class="admin-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Teléfono
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Pedidos
+                            </th>
+
+                            <th>
+                                Total comprado
+                            </th>
+
+                            <th>
+                                Último pedido
+                            </th>
+
+                            <th>
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="listaClientes">
+
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="empty-table"
+                            >
+
+                                <span>
+                                    👥
+                                </span>
+
+                                <p>
+                                    No hay clientes registrados todavía.
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     MODAL DETALLE DEL CLIENTE
+========================================== -->
+
+<div
+    class="modal"
+    id="modalCliente"
+    hidden
+>
+
+
+    <div class="modal-overlay"></div>
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <span class="section-eyebrow">
+                    CLIENTE
+                </span>
+
+                <h2 id="modalClienteTitulo">
+                    Cliente
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarModalCliente"
+                aria-label="Cerrar"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <div
+            class="modal-body"
+            id="detalleCliente"
+        >
+
+            <!-- clientes.js cargará aquí el detalle -->
+
+        </div>
+
+
+
+        <div class="modal-footer">
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                id="btnCerrarModalClienteFooter"
+            >
+
+                Cerrar
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/clientes.js"></script>
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Categoría | CHAMAQUITOS
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         BARRA SUPERIOR
+    ====================================== -->
+
+    <div class="topbar">
+
+        Envíos a todo el país
+        ·
+        Consultas por WhatsApp
+
+    </div>
+
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header>
+
+        <nav class="nav">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="inicio.html"
+                class="logo"
+            >
+
+                CHAMAQUITOS
+
+            </a>
+
+
+
+            <!-- MENÚ -->
+
+            <div class="menu">
+
+                <a href="inicio.html">
+                    Inicio
+                </a>
+
+                <a href="inicio.html#categorias">
+                    Categorías
+                </a>
+
+                <a href="inicio.html#novedades">
+                    Novedades
+                </a>
+
+                <a href="inicio.html#ofertas">
+                    Ofertas
+                </a>
+
+            </div>
+
+
+
+            <!-- ICONOS -->
+
+            <div class="icons">
+
+                <button
+                    type="button"
+                    aria-label="Buscar"
+                    id="btnBuscar"
+                >
+                    ⌕
+                </button>
+
+
+                <button
+                    type="button"
+                    aria-label="Favoritos"
+                    id="btnFavoritos"
+                >
+                    ♡
+                </button>
+
+
+                <button
+                    type="button"
+                    aria-label="Carrito"
+                    id="btnCarrito"
+                >
+                    🛒
+                </button>
+
+            </div>
+
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================
+         CONTENIDO PRINCIPAL
+    ====================================== -->
+
+    <main>
+
+
+        <!-- =================================
+             ENCABEZADO DE CATEGORÍA
+        ================================== -->
+
+        <section class="products-section category-page">
+
+            <div class="section-head">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        CHAMAQUITOS
+                    </span>
+
+                    <h1 id="tituloCategoria">
+                        Productos
+                    </h1>
+
+                    <p id="descripcionCategoria">
+                        Descubrí nuestros productos.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 FILTROS
+            ================================== -->
+
+            <div class="category-filters">
+
+                <div class="category-search">
+
+                    <input
+                        type="search"
+                        id="buscarCategoria"
+                        placeholder="Buscar producto..."
+                    >
+
+                </div>
+
+
+                <select id="ordenProductos">
+
+                    <option value="">
+                        Ordenar por
+                    </option>
+
+                    <option value="precio-menor">
+                        Precio: menor a mayor
+                    </option>
+
+                    <option value="precio-mayor">
+                        Precio: mayor a menor
+                    </option>
+
+                    <option value="nombre">
+                        Nombre: A-Z
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- =================================
+                 PRODUCTOS
+            ================================== -->
+
+            <div
+                class="products"
+                id="listaProductosCategoria"
+            >
+
+                <!-- Los productos serán generados
+                     automáticamente mediante JavaScript -->
+
+            </div>
+
+
+
+            <!-- =================================
+                 MENSAJE SIN PRODUCTOS
+            ================================== -->
+
+            <div
+                class="category-empty"
+                id="categoriaVacia"
+                hidden
+            >
+
+                <span>
+                    📦
+                </span>
+
+                <h2>
+                    No encontramos productos
+                </h2>
+
+                <p>
+                    Actualmente no hay productos disponibles
+                    en esta categoría.
+                </p>
+
+                <a
+                    href="inicio.html#categorias"
+                    class="btn"
+                >
+                    VER CATEGORÍAS
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             CATEGORÍAS
+        ================================== -->
+
+        <section class="categories-section">
+
+            <div class="section-head">
+
+                <h2>
+                    Explorar otras categorías
+                </h2>
+
+            </div>
+
+
+            <div class="categories">
+
+
+                <a
+                    class="category"
+                    href="categoria.html?categoria=ninas"
+                >
+
+                    <span>
+                        Niñas
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="category"
+                    href="categoria.html?categoria=ninos"
+                >
+
+                    <span>
+                        Niños
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="category"
+                    href="categoria.html?categoria=bebes"
+                >
+
+                    <span>
+                        Bebés
+                    </span>
+
+                </a>
+
+
+                <a
+                    class="category"
+                    href="categoria.html?categoria=accesorios"
+                >
+
+                    <span>
+                        Accesorios
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             NEWSLETTER
+        ================================== -->
+
+        <section class="newsletter-section">
+
+            <div class="newsletter">
+
+                <span class="section-eyebrow">
+                    ENTERATE PRIMERO
+                </span>
+
+                <h2>
+                    Recibí nuestras novedades
+                </h2>
+
+                <p>
+                    Enterate primero de nuevos
+                    ingresos y promociones.
+                </p>
+
+
+                <form id="newsletterForm">
+
+                    <input
+                        type="email"
+                        id="emailNewsletter"
+                        placeholder="Tu correo electrónico"
+                        required
+                    >
+
+                    <button type="submit">
+                        Suscribirme
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+
+            <div class="footer-brand">
+
+                <strong>
+                    CHAMAQUITOS
+                </strong>
+
+                <p>
+                    Ropa infantil
+                    ·
+                    Catamarca, Argentina
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-links">
+
+
+                <div>
+
+                    <strong>
+                        TIENDA
+                    </strong>
+
+                    <a href="inicio.html">
+                        Inicio
+                    </a>
+
+                    <a href="inicio.html#categorias">
+                        Categorías
+                    </a>
+
+                    <a href="inicio.html#novedades">
+                        Novedades
+                    </a>
+
+                    <a href="inicio.html#ofertas">
+                        Ofertas
+                    </a>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        AYUDA
+                    </strong>
+
+                    <a href="#">
+                        Contacto
+                    </a>
+
+                    <a href="#">
+                        Envíos
+                    </a>
+
+                    <a href="#">
+                        Cambios y devoluciones
+                    </a>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        SEGUINOS
+                    </strong>
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+                    <a href="#">
+                        WhatsApp
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 CHAMAQUITOS.
+                Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/tienda.js"></script>
+
+
+    <script>
+
+        /* =====================================
+           OBTENER CATEGORÍA DE LA URL
+        ====================================== */
+
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const categoria =
+            parametros.get("categoria");
+
+
+        /* =====================================
+           DATOS DE LAS CATEGORÍAS
+        ====================================== */
+
+        const categorias = {
+
+            ninas: {
+                titulo: "Ropa para niñas",
+                descripcion:
+                    "Descubrí nuestra colección de prendas para niñas."
+            },
+
+            ninos: {
+                titulo: "Ropa para niños",
+                descripcion:
+                    "Descubrí nuestra colección de prendas para niños."
+            },
+
+            bebes: {
+                titulo: "Ropa para bebés",
+                descripcion:
+                    "Prendas cómodas y pensadas para los más pequeños."
+            },
+
+            accesorios: {
+                titulo: "Accesorios",
+                descripcion:
+                    "Completá cada look con nuestros accesorios."
+            }
+
+        };
+
+
+        /* =====================================
+           ELEMENTOS
+        ====================================== */
+
+        const tituloCategoria =
+            document.getElementById(
+                "tituloCategoria"
+            );
+
+        const descripcionCategoria =
+            document.getElementById(
+                "descripcionCategoria"
+            );
+
+        const listaProductos =
+            document.getElementById(
+                "listaProductosCategoria"
+            );
+
+        const categoriaVacia =
+            document.getElementById(
+                "categoriaVacia"
+            );
+
+        const buscarCategoria =
+            document.getElementById(
+                "buscarCategoria"
+            );
+
+        const ordenProductos =
+            document.getElementById(
+                "ordenProductos"
+            );
+
+
+
+        /* =====================================
+           CONFIGURAR TÍTULO
+        ====================================== */
+
+        if (categorias[categoria]) {
+
+            tituloCategoria.textContent =
+                categorias[categoria].titulo;
+
+            descripcionCategoria.textContent =
+                categorias[categoria].descripcion;
+
+        } else {
+
+            tituloCategoria.textContent =
+                "Todos los productos";
+
+            descripcionCategoria.textContent =
+                "Descubrí todos nuestros productos disponibles.";
+
+        }
+
+
+
+        /* =====================================
+           CARGAR PRODUCTOS
+        ====================================== */
+
+        let productos = JSON.parse(
+            localStorage.getItem(
+                "tienda_productos"
+            ) || "[]"
+        );
+
+
+        /*
+            Mostrar únicamente productos:
+
+            - activos
+            - con stock
+            - pertenecientes a la categoría
+        */
+
+        let productosFiltrados =
+            productos.filter(producto => {
+
+                const activo =
+                    producto.estado !== "oculto";
+
+                const tieneStock =
+                    Number(producto.stock) > 0;
+
+                const perteneceCategoria =
+                    !categoria ||
+                    producto.categoria === categoria;
+
+                return (
+                    activo &&
+                    tieneStock &&
+                    perteneceCategoria
+                );
+
+            });
+
+
+
+        /* =====================================
+           MOSTRAR PRODUCTOS
+        ====================================== */
+
+        function actualizarProductos() {
+
+            let resultado =
+                [...productosFiltrados];
+
+
+            /* BUSCADOR */
+
+            const termino =
+                buscarCategoria.value
+                    .trim()
+                    .toLowerCase();
+
+
+            if (termino) {
+
+                resultado =
+                    resultado.filter(producto => {
+
+                        const nombre =
+                            (
+                                producto.nombre ||
+                                ""
+                            ).toLowerCase();
+
+                        return nombre.includes(
+                            termino
+                        );
+
+                    });
+
+            }
+
+
+
+            /* ORDEN */
+
+            const orden =
+                ordenProductos.value;
+
+
+            if (orden === "precio-menor") {
+
+                resultado.sort(
+                    (a, b) =>
+                        Number(a.precio) -
+                        Number(b.precio)
+                );
+
+            }
+
+
+            if (orden === "precio-mayor") {
+
+                resultado.sort(
+                    (a, b) =>
+                        Number(b.precio) -
+                        Number(a.precio)
+                );
+
+            }
+
+
+            if (orden === "nombre") {
+
+                resultado.sort(
+                    (a, b) =>
+                        (
+                            a.nombre || ""
+                        ).localeCompare(
+                            b.nombre || "",
+                            "es"
+                        )
+                );
+
+            }
+
+
+
+            /* LIMPIAR */
+
+            listaProductos.innerHTML = "";
+
+
+
+            /* SIN RESULTADOS */
+
+            if (resultado.length === 0) {
+
+                categoriaVacia.hidden = false;
+
+                return;
+
+            }
+
+
+            categoriaVacia.hidden = true;
+
+
+
+            /*
+                Utilizamos la misma función
+                que utiliza inicio.html
+                cuando está disponible.
+            */
+
+            if (
+                typeof mostrarProductos ===
+                "function"
+            ) {
+
+                mostrarProductos(
+                    resultado,
+                    listaProductos
+                );
+
+            } else {
+
+                mostrarProductosCategoria(
+                    resultado
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           FUNCIÓN DE RESPALDO
+        ====================================== */
+
+        function mostrarProductosCategoria(
+            productos
+        ) {
+
+            listaProductos.innerHTML = "";
+
+
+            productos.forEach(producto => {
+
+                const article =
+                    document.createElement(
+                        "article"
+                    );
+
+                article.className =
+                    "product-card";
+
+
+                const imagen =
+                    producto.imagen ||
+                    (
+                        producto.imagenes &&
+                        producto.imagenes[0]
+                    ) ||
+                    "";
+
+
+                article.innerHTML = `
+
+                    <div class="product-image">
+
+                        ${
+                            imagen
+                            ?
+                            `<img
+                                src="${imagen}"
+                                alt="${producto.nombre || "Producto"}"
+                            >`
+                            :
+                            `<span>
+                                📦
+                            </span>`
+                        }
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span class="product-category">
+                            ${producto.categoria || ""}
+                        </span>
+
+                        <h3>
+                            ${producto.nombre || "Producto"}
+                        </h3>
+
+                        <strong>
+                            $${Number(
+                                producto.precio || 0
+                            ).toLocaleString("es-AR")}
+                        </strong>
+
+                    </div>
+
+                `;
+
+
+                listaProductos.appendChild(
+                    article
+                );
+
+            });
+
+        }
+
+
+
+        /* =====================================
+           BUSCADOR
+        ====================================== */
+
+        if (buscarCategoria) {
+
+            buscarCategoria.addEventListener(
+                "input",
+                actualizarProductos
+            );
+
+        }
+
+
+
+        /* =====================================
+           ORDENAMIENTO
+        ====================================== */
+
+        if (ordenProductos) {
+
+            ordenProductos.addEventListener(
+                "change",
+                actualizarProductos
+            );
+
+        }
+
+
+
+        /* =====================================
+           NEWSLETTER
+        ====================================== */
+
+        const newsletterForm =
+            document.getElementById(
+                "newsletterForm"
+            );
+
+
+        if (newsletterForm) {
+
+            newsletterForm.addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+                    const email =
+                        document
+                            .getElementById(
+                                "emailNewsletter"
+                            )
+                            .value.trim();
+
+
+                    if (!email) {
+                        return;
+                    }
+
+
+                    alert(
+                        "¡Gracias por suscribirte!"
+                    );
+
+
+                    newsletterForm.reset();
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           CARRITO
+        ====================================== */
+
+        const btnCarrito =
+            document.getElementById(
+                "btnCarrito"
+            );
+
+
+        if (btnCarrito) {
+
+            btnCarrito.addEventListener(
+                "click",
+                function() {
+
+                    alert(
+                        "El carrito estará disponible próximamente."
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           FAVORITOS
+        ====================================== */
+
+        const btnFavoritos =
+            document.getElementById(
+                "btnFavoritos"
+            );
+
+
+        if (btnFavoritos) {
+
+            btnFavoritos.addEventListener(
+                "click",
+                function() {
+
+                    alert(
+                        "Los favoritos estarán disponibles próximamente."
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================
+           INICIALIZAR
+        ====================================== */
+
+        actualizarProductos();
+
+    </script>
+
+
+</body>
+
+</html>
+

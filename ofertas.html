@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    CHAMAQUITOS | Ofertas
+</title>
+
+
+<!-- =====================================
+     CSS PRINCIPAL
+====================================== -->
+
+<link
+    rel="stylesheet"
+    href="estilos.css"
+>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =====================================
+     BARRA SUPERIOR
+====================================== -->
+
+<div class="topbar">
+
+    Envíos a todo el país
+    ·
+    Consultas por WhatsApp
+
+</div>
+
+
+
+<!-- =====================================
+     HEADER
+====================================== -->
+
+<header>
+
+    <nav class="nav">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="inicio.html"
+            class="logo"
+        >
+
+            CHAMAQUITOS
+
+        </a>
+
+
+
+        <!-- MENÚ -->
+
+        <div class="menu">
+
+            <a href="inicio.html">
+                Inicio
+            </a>
+
+            <a href="categoria.html">
+                Categorías
+            </a>
+
+            <a href="novedades.html">
+                Novedades
+            </a>
+
+            <a
+                href="ofertas.html"
+                class="active"
+            >
+                Ofertas
+            </a>
+
+        </div>
+
+
+
+        <!-- ICONOS -->
+
+        <div class="icons">
+
+            <button
+                type="button"
+                aria-label="Buscar"
+                id="btnBuscar"
+            >
+                ⌕
+            </button>
+
+
+            <button
+                type="button"
+                aria-label="Favoritos"
+                id="btnFavoritos"
+            >
+                ♡
+            </button>
+
+
+            <button
+                type="button"
+                aria-label="Carrito"
+                id="btnCarrito"
+            >
+                🛒
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================
+     CONTENIDO PRINCIPAL
+====================================== -->
+
+<main>
+
+
+    <!-- =================================
+         ENCABEZADO
+    ================================== -->
+
+    <section class="page-header">
+
+        <div class="page-header-content">
+
+            <span class="section-eyebrow">
+                APROVECHÁ
+            </span>
+
+            <h1>
+                Ofertas
+            </h1>
+
+            <p>
+                Encontrá tus prendas favoritas
+                a precios especiales.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         PRODUCTOS EN OFERTA
+    ================================== -->
+
+    <section class="products-page">
+
+
+        <!-- =================================
+             BARRA DE PRODUCTOS
+        ================================== -->
+
+        <div class="products-toolbar">
+
+            <div>
+
+                <strong id="cantidadOfertas">
+                    Ofertas
+                </strong>
+
+            </div>
+
+
+            <div class="products-sort">
+
+                <label for="ordenOfertas">
+                    Ordenar por
+                </label>
+
+                <select id="ordenOfertas">
+
+                    <option value="oferta">
+                        Ofertas destacadas
+                    </option>
+
+                    <option value="precio-menor">
+                        Precio: menor a mayor
+                    </option>
+
+                    <option value="precio-mayor">
+                        Precio: mayor a menor
+                    </option>
+
+                    <option value="nombre">
+                        Nombre
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             LISTA DE PRODUCTOS
+        ================================== -->
+
+        <div
+            class="products"
+            id="listaOfertas"
+        >
+
+            <!--
+                Los productos serán
+                cargados automáticamente
+                desde tienda.js
+            -->
+
+        </div>
+
+
+
+        <!-- =================================
+             SIN OFERTAS
+        ================================== -->
+
+        <div
+            class="products-empty"
+            id="ofertasVacias"
+            hidden
+        >
+
+            <span>
+                🏷️
+            </span>
+
+            <h2>
+                No hay ofertas disponibles
+            </h2>
+
+            <p>
+                Actualmente no tenemos productos
+                en oferta. Volvé a visitarnos
+                para descubrir nuevas promociones.
+            </p>
+
+            <a
+                href="categoria.html"
+                class="btn"
+            >
+                VER CATEGORÍAS
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         BANNER DE OFERTAS
+    ================================== -->
+
+    <section class="promo-section">
+
+        <div class="promo-box">
+
+            <div class="promo-content">
+
+                <span class="section-eyebrow">
+                    PRECIOS ESPECIALES
+                </span>
+
+                <h2>
+                    Más diversión,
+                    mejores precios.
+                </h2>
+
+                <p>
+                    Aprovechá nuestras ofertas
+                    y encontrá prendas para los
+                    más pequeños.
+                </p>
+
+                <a
+                    href="categoria.html"
+                    class="btn"
+                >
+                    VER CATEGORÍAS
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+====================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+
+        <!-- MARCA -->
+
+        <div class="footer-brand">
+
+            <strong>
+                CHAMAQUITOS
+            </strong>
+
+            <p>
+                Ropa infantil
+                ·
+                Catamarca, Argentina
+            </p>
+
+        </div>
+
+
+
+        <!-- ENLACES -->
+
+        <div class="footer-links">
+
+
+            <div>
+
+                <strong>
+                    TIENDA
+                </strong>
+
+                <a href="categoria.html">
+                    Categorías
+                </a>
+
+                <a href="novedades.html">
+                    Novedades
+                </a>
+
+                <a href="ofertas.html">
+                    Ofertas
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <strong>
+                    AYUDA
+                </strong>
+
+                <a href="#">
+                    Contacto
+                </a>
+
+                <a href="#">
+                    Envíos
+                </a>
+
+                <a href="#">
+                    Cambios y devoluciones
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <strong>
+                    SEGUINOS
+                </strong>
+
+                <a href="#">
+                    Instagram
+                </a>
+
+                <a href="#">
+                    WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 CHAMAQUITOS.
+            Todos los derechos reservados.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================
+     JAVASCRIPT PRINCIPAL
+====================================== -->
+
+<script src="js/tienda.js"></script>
+
+
+
+<script>
+
+    /* =================================
+       ELEMENTOS
+    ================================= */
+
+    const listaOfertas =
+        document.getElementById(
+            "listaOfertas"
+        );
+
+
+    const ofertasVacias =
+        document.getElementById(
+            "ofertasVacias"
+        );
+
+
+    const cantidadOfertas =
+        document.getElementById(
+            "cantidadOfertas"
+        );
+
+
+    const ordenOfertas =
+        document.getElementById(
+            "ordenOfertas"
+        );
+
+
+
+    /* =================================
+       OBTENER OFERTAS
+    ================================= */
+
+    function obtenerOfertas() {
+
+        const productos =
+            JSON.parse(
+                localStorage.getItem(
+                    "tienda_productos"
+                ) || "[]"
+            );
+
+
+        return productos.filter(
+            producto => {
+
+                return (
+
+                    producto.estado !== "oculto"
+
+                    &&
+
+                    Number(
+                        producto.stock
+                    ) > 0
+
+                    &&
+
+                    producto.etiqueta ===
+                    "oferta"
+
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       MOSTRAR OFERTAS
+    ================================= */
+
+    function mostrarOfertas() {
+
+        let productos =
+            obtenerOfertas();
+
+
+        const orden =
+            ordenOfertas.value;
+
+
+
+        /* ===============================
+           ORDENAR POR PRECIO MENOR
+        ================================ */
+
+        if (
+            orden ===
+            "precio-menor"
+        ) {
+
+            productos.sort(
+                (a, b) =>
+                    Number(
+                        a.precio || 0
+                    ) -
+                    Number(
+                        b.precio || 0
+                    )
+            );
+
+        }
+
+
+
+        /* ===============================
+           ORDENAR POR PRECIO MAYOR
+        ================================ */
+
+        if (
+            orden ===
+            "precio-mayor"
+        ) {
+
+            productos.sort(
+                (a, b) =>
+                    Number(
+                        b.precio || 0
+                    ) -
+                    Number(
+                        a.precio || 0
+                    )
+            );
+
+        }
+
+
+
+        /* ===============================
+           ORDENAR POR NOMBRE
+        ================================ */
+
+        if (
+            orden ===
+            "nombre"
+        ) {
+
+            productos.sort(
+                (a, b) =>
+                    (
+                        a.nombre || ""
+                    ).localeCompare(
+                        b.nombre || ""
+                    )
+            );
+
+        }
+
+
+
+        /* ===============================
+           CANTIDAD
+        ================================ */
+
+        cantidadOfertas.textContent =
+            productos.length +
+            (
+                productos.length === 1
+                    ? " oferta"
+                    : " ofertas"
+            );
+
+
+
+        /* ===============================
+           SIN OFERTAS
+        ================================ */
+
+        if (
+            productos.length === 0
+        ) {
+
+            listaOfertas.innerHTML = "";
+
+            ofertasVacias.hidden = false;
+
+            return;
+
+        }
+
+
+
+        ofertasVacias.hidden = true;
+
+
+
+        /* ===============================
+           MOSTRAR PRODUCTOS
+        ================================ */
+
+        listaOfertas.innerHTML = "";
+
+
+
+        if (
+            typeof mostrarProductos ===
+            "function"
+        ) {
+
+            mostrarProductos(
+                productos,
+                listaOfertas
+            );
+
+        }
+
+    }
+
+
+
+    /* =================================
+       ORDENAR
+    ================================= */
+
+    if (ordenOfertas) {
+
+        ordenOfertas.addEventListener(
+            "change",
+            mostrarOfertas
+        );
+
+    }
+
+
+
+    /* =================================
+       BUSCAR
+    ================================= */
+
+    const btnBuscar =
+        document.getElementById(
+            "btnBuscar"
+        );
+
+
+    if (btnBuscar) {
+
+        btnBuscar.addEventListener(
+            "click",
+            function() {
+
+                const termino =
+                    prompt(
+                        "¿Qué producto estás buscando?"
+                    );
+
+
+                if (!termino) {
+
+                    return;
+
+                }
+
+
+                const productos =
+                    obtenerOfertas();
+
+
+                const resultado =
+                    productos.filter(
+                        producto => {
+
+                            const nombre =
+                                (
+                                    producto.nombre ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return nombre.includes(
+                                termino.toLowerCase()
+                            );
+
+                        }
+                    );
+
+
+                listaOfertas.innerHTML =
+                    "";
+
+
+                if (
+                    typeof mostrarProductos ===
+                    "function"
+                ) {
+
+                    mostrarProductos(
+                        resultado,
+                        listaOfertas
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       CARRITO
+    ================================= */
+
+    const btnCarrito =
+        document.getElementById(
+            "btnCarrito"
+        );
+
+
+    if (btnCarrito) {
+
+        btnCarrito.addEventListener(
+            "click",
+            function() {
+
+                alert(
+                    "El carrito estará disponible próximamente."
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       FAVORITOS
+    ================================= */
+
+    const btnFavoritos =
+        document.getElementById(
+            "btnFavoritos"
+        );
+
+
+    if (btnFavoritos) {
+
+        btnFavoritos.addEventListener(
+            "click",
+            function() {
+
+                alert(
+                    "Los favoritos estarán disponibles próximamente."
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       INICIAR
+    ================================= */
+
+    mostrarOfertas();
+
+</script>
+```
+
+</body>
+
+</html>

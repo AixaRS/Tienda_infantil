@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    CHAMAQUITOS | Novedades
+</title>
+
+
+<!-- =====================================
+     CSS PRINCIPAL
+====================================== -->
+
+<link
+    rel="stylesheet"
+    href="estilos.css"
+>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =====================================
+     BARRA SUPERIOR
+====================================== -->
+
+<div class="topbar">
+
+    Envíos a todo el país
+    ·
+    Consultas por WhatsApp
+
+</div>
+
+
+
+<!-- =====================================
+     HEADER
+====================================== -->
+
+<header>
+
+    <nav class="nav">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="inicio.html"
+            class="logo"
+        >
+
+            CHAMAQUITOS
+
+        </a>
+
+
+
+        <!-- MENÚ -->
+
+        <div class="menu">
+
+            <a href="inicio.html">
+                Inicio
+            </a>
+
+            <a href="categoria.html">
+                Categorías
+            </a>
+
+            <a
+                href="novedades.html"
+                class="active"
+            >
+                Novedades
+            </a>
+
+            <a href="ofertas.html">
+                Ofertas
+            </a>
+
+        </div>
+
+
+
+        <!-- ICONOS -->
+
+        <div class="icons">
+
+            <button
+                type="button"
+                aria-label="Buscar"
+                id="btnBuscar"
+            >
+                ⌕
+            </button>
+
+
+            <button
+                type="button"
+                aria-label="Favoritos"
+                id="btnFavoritos"
+            >
+                ♡
+            </button>
+
+
+            <button
+                type="button"
+                aria-label="Carrito"
+                id="btnCarrito"
+            >
+                🛒
+            </button>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================
+     CONTENIDO PRINCIPAL
+====================================== -->
+
+<main>
+
+
+    <!-- =================================
+         ENCABEZADO
+    ================================== -->
+
+    <section class="page-header">
+
+        <div class="page-header-content">
+
+            <span class="section-eyebrow">
+                DESCUBRÍ
+            </span>
+
+            <h1>
+                Novedades
+            </h1>
+
+            <p>
+                Descubrí los últimos productos
+                que llegaron a CHAMAQUITOS.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         FILTROS
+    ================================== -->
+
+    <section class="products-page">
+
+        <div class="products-toolbar">
+
+            <div>
+
+                <strong id="cantidadProductos">
+                    Novedades
+                </strong>
+
+            </div>
+
+
+            <div class="products-sort">
+
+                <label for="ordenProductos">
+                    Ordenar por
+                </label>
+
+                <select id="ordenProductos">
+
+                    <option value="recientes">
+                        Más recientes
+                    </option>
+
+                    <option value="precio-menor">
+                        Precio: menor a mayor
+                    </option>
+
+                    <option value="precio-mayor">
+                        Precio: mayor a menor
+                    </option>
+
+                    <option value="nombre">
+                        Nombre
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             PRODUCTOS
+        ================================== -->
+
+        <div
+            class="products"
+            id="listaNovedades"
+        >
+
+            <!--
+                Los productos nuevos
+                serán cargados automáticamente
+                desde tienda.js
+            -->
+
+        </div>
+
+
+        <!-- =================================
+             MENSAJE SIN PRODUCTOS
+        ================================== -->
+
+        <div
+            class="products-empty"
+            id="novedadesVacias"
+            hidden
+        >
+
+            <span>
+                📦
+            </span>
+
+            <h2>
+                Todavía no hay novedades
+            </h2>
+
+            <p>
+                Próximamente vas a encontrar
+                nuevos productos.
+            </p>
+
+            <a
+                href="categoria.html"
+                class="btn"
+            >
+                VER CATEGORÍAS
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         BANNER
+    ================================== -->
+
+    <section class="promo-section">
+
+        <div class="promo-box">
+
+            <div class="promo-content">
+
+                <span class="section-eyebrow">
+                    CHAMAQUITOS
+                </span>
+
+                <h2>
+                    Nuevas prendas,
+                    nuevas aventuras.
+                </h2>
+
+                <p>
+                    Explorá nuestra colección
+                    y encontrá prendas pensadas
+                    para los más pequeños.
+                </p>
+
+                <a
+                    href="categoria.html"
+                    class="btn"
+                >
+                    VER CATEGORÍAS
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================
+     FOOTER
+====================================== -->
+
+<footer>
+
+    <div class="footer-inner">
+
+
+        <div class="footer-brand">
+
+            <strong>
+                CHAMAQUITOS
+            </strong>
+
+            <p>
+                Ropa infantil
+                ·
+                Catamarca, Argentina
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+
+            <div>
+
+                <strong>
+                    TIENDA
+                </strong>
+
+                <a href="categoria.html">
+                    Categorías
+                </a>
+
+                <a href="novedades.html">
+                    Novedades
+                </a>
+
+                <a href="ofertas.html">
+                    Ofertas
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <strong>
+                    AYUDA
+                </strong>
+
+                <a href="#">
+                    Contacto
+                </a>
+
+                <a href="#">
+                    Envíos
+                </a>
+
+                <a href="#">
+                    Cambios y devoluciones
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <strong>
+                    SEGUINOS
+                </strong>
+
+                <a href="#">
+                    Instagram
+                </a>
+
+                <a href="#">
+                    WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 CHAMAQUITOS.
+            Todos los derechos reservados.
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
+
+<script src="js/tienda.js"></script>
+
+
+
+<script>
+
+    /* =================================
+       CARGAR NOVEDADES
+    ================================= */
+
+    const listaNovedades =
+        document.getElementById(
+            "listaNovedades"
+        );
+
+    const novedadesVacias =
+        document.getElementById(
+            "novedadesVacias"
+        );
+
+    const cantidadProductos =
+        document.getElementById(
+            "cantidadProductos"
+        );
+
+    const ordenProductos =
+        document.getElementById(
+            "ordenProductos"
+        );
+
+
+
+    function obtenerNovedades() {
+
+        const productos =
+            JSON.parse(
+                localStorage.getItem(
+                    "tienda_productos"
+                ) || "[]"
+            );
+
+
+        return productos.filter(
+            producto => {
+
+                return (
+                    producto.estado !== "oculto" &&
+                    Number(producto.stock) > 0 &&
+                    (
+                        producto.etiqueta === "nuevo" ||
+                        producto.nuevo === true
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       MOSTRAR PRODUCTOS
+    ================================= */
+
+    function mostrarNovedades() {
+
+        let productos =
+            obtenerNovedades();
+
+
+        /* ORDEN */
+
+        const orden =
+            ordenProductos.value;
+
+
+        if (orden === "precio-menor") {
+
+            productos.sort(
+                (a, b) =>
+                    Number(a.precio || 0) -
+                    Number(b.precio || 0)
+            );
+
+        }
+
+
+        if (orden === "precio-mayor") {
+
+            productos.sort(
+                (a, b) =>
+                    Number(b.precio || 0) -
+                    Number(a.precio || 0)
+            );
+
+        }
+
+
+        if (orden === "nombre") {
+
+            productos.sort(
+                (a, b) =>
+                    (a.nombre || "")
+                        .localeCompare(
+                            b.nombre || ""
+                        )
+            );
+
+        }
+
+
+        /* CANTIDAD */
+
+        cantidadProductos.textContent =
+            productos.length +
+            (
+                productos.length === 1
+                    ? " novedad"
+                    : " novedades"
+            );
+
+
+
+        /* SIN PRODUCTOS */
+
+        if (productos.length === 0) {
+
+            listaNovedades.innerHTML = "";
+
+            novedadesVacias.hidden = false;
+
+            return;
+
+        }
+
+
+        novedadesVacias.hidden = true;
+
+
+
+        /* MOSTRAR */
+
+        if (
+            typeof mostrarProductos ===
+            "function"
+        ) {
+
+            /*
+                Usamos la misma función
+                utilizada en inicio.html
+            */
+
+            listaNovedades.innerHTML = "";
+
+            mostrarProductos(
+                productos,
+                listaNovedades
+            );
+
+        }
+
+    }
+
+
+
+    /* =================================
+       ORDENAR
+    ================================= */
+
+    if (ordenProductos) {
+
+        ordenProductos.addEventListener(
+            "change",
+            mostrarNovedades
+        );
+
+    }
+
+
+
+    /* =================================
+       BUSCAR
+    ================================= */
+
+    const btnBuscar =
+        document.getElementById(
+            "btnBuscar"
+        );
+
+
+    if (btnBuscar) {
+
+        btnBuscar.addEventListener(
+            "click",
+            function() {
+
+                const termino =
+                    prompt(
+                        "¿Qué producto estás buscando?"
+                    );
+
+
+                if (!termino) {
+                    return;
+                }
+
+
+                const productos =
+                    obtenerNovedades();
+
+
+                const resultado =
+                    productos.filter(
+                        producto => {
+
+                            const nombre =
+                                (
+                                    producto.nombre ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return nombre.includes(
+                                termino.toLowerCase()
+                            );
+
+                        }
+                    );
+
+
+                listaNovedades.innerHTML = "";
+
+
+                if (
+                    typeof mostrarProductos ===
+                    "function"
+                ) {
+
+                    mostrarProductos(
+                        resultado,
+                        listaNovedades
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       CARRITO
+    ================================= */
+
+    const btnCarrito =
+        document.getElementById(
+            "btnCarrito"
+        );
+
+
+    if (btnCarrito) {
+
+        btnCarrito.addEventListener(
+            "click",
+            function() {
+
+                alert(
+                    "El carrito estará disponible próximamente."
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       FAVORITOS
+    ================================= */
+
+    const btnFavoritos =
+        document.getElementById(
+            "btnFavoritos"
+        );
+
+
+    if (btnFavoritos) {
+
+        btnFavoritos.addEventListener(
+            "click",
+            function() {
+
+                alert(
+                    "Los favoritos estarán disponibles próximamente."
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================
+       INICIAR
+    ================================= */
+
+    mostrarNovedades();
+
+</script>
+```
+
+</body>
+
+</html>

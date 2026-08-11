@@ -1,0 +1,1115 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Productos | Administrador
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="estilos_admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-container">
+
+
+    <!-- =========================================
+         BARRA LATERAL
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+
+            <h2>
+                CHAMAQUITOS
+            </h2>
+
+            <span>
+                Panel de administración
+            </span>
+
+        </div>
+
+
+        <nav class="admin-menu">
+
+
+            <a href="panel.html">
+
+                <span>📊</span>
+
+                Panel principal
+
+            </a>
+
+
+            <a
+                href="productos.html"
+                class="active"
+            >
+
+                <span>📦</span>
+
+                Productos
+
+            </a>
+
+
+            <a href="pedidos.html">
+
+                <span>🛒</span>
+
+                Pedidos
+
+            </a>
+
+
+            <a href="ventas.html">
+
+                <span>📊</span>
+
+                Ventas
+
+            </a>
+
+
+            <a href="clientes.html">
+
+                <span>👥</span>
+
+                Clientes
+
+            </a>
+
+
+            <a href="configuracion.html">
+
+                <span>⚙️</span>
+
+                Configuración
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/Inicio.html">
+
+                ← Ver tienda
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- =====================================
+             ENCABEZADO
+        ====================================== -->
+
+        <header class="admin-header">
+
+
+            <div>
+
+                <span class="admin-eyebrow">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Productos
+                </h1>
+
+                <p>
+                    Administrá los productos de tu tienda.
+                </p>
+
+            </div>
+
+
+            <div class="admin-header-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnNuevoProducto"
+                >
+
+                    + Nuevo producto
+
+                </button>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================
+             RESUMEN
+        ====================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Productos
+                </span>
+
+                <strong id="totalProductos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Activos
+                </span>
+
+                <strong id="productosActivos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Agotados
+                </span>
+
+                <strong id="productosAgotados">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Stock bajo
+                </span>
+
+                <strong id="productosStockBajo">
+                    0
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             CATÁLOGO
+        ====================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        CATALOGO
+                    </span>
+
+                    <h2>
+                        Productos
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 FILTROS
+            ================================== -->
+
+            <section class="admin-filters">
+
+
+                <div class="filter-group">
+
+                    <label for="buscarProducto">
+
+                        Buscar
+
+                    </label>
+
+                    <input
+                        type="search"
+                        id="buscarProducto"
+                        placeholder="Buscar producto..."
+                    >
+
+                </div>
+
+
+
+                <div class="filter-group">
+
+                    <label for="filtroCategoria">
+
+                        Categoría
+
+                    </label>
+
+                    <select id="filtroCategoria">
+
+                        <option value="">
+                            Todas
+                        </option>
+
+                        <option value="ninas">
+                            Niñas
+                        </option>
+
+                        <option value="ninos">
+                            Niños
+                        </option>
+
+                        <option value="bebes">
+                            Bebés
+                        </option>
+
+                        <option value="accesorios">
+                            Accesorios
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="filter-group">
+
+                    <label for="filtroEstado">
+
+                        Estado
+
+                    </label>
+
+                    <select id="filtroEstado">
+
+                        <option value="">
+                            Todos
+                        </option>
+
+                        <option value="activo">
+                            Activos
+                        </option>
+
+                        <option value="agotado">
+                            Agotados
+                        </option>
+
+                        <option value="oculto">
+                            Ocultos
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 TABLA DE PRODUCTOS
+            ================================== -->
+
+            <div class="table-container">
+
+
+                <table class="admin-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Producto
+                            </th>
+
+                            <th>
+                                Categoría
+                            </th>
+
+                            <th>
+                                Precio
+                            </th>
+
+                            <th>
+                                Stock
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                            <th>
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="listaProductos">
+
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="empty-table"
+                            >
+
+                                <span>
+                                    📦
+                                </span>
+
+                                <p>
+                                    Todavía no hay productos.
+                                </p>
+
+                                <button
+                                    type="button"
+                                    class="btn-secondary"
+                                    id="btnPrimerProducto"
+                                >
+
+                                    + Agregar producto
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             FORMULARIO DE PRODUCTO
+        ====================================== -->
+
+        <section
+            class="admin-section product-form-section"
+            id="formularioProducto"
+            hidden
+        >
+
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        CATÁLOGO
+                    </span>
+
+                    <h2 id="tituloFormulario">
+                        Nuevo producto
+                    </h2>
+
+                    <p>
+                        Completá la información del producto.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <form
+                id="formProducto"
+                enctype="multipart/form-data"
+            >
+
+
+
+                <!-- =================================
+                     INFORMACIÓN BÁSICA
+                ================================== -->
+
+                <div class="form-card">
+
+
+                    <h3>
+                        Información básica
+                    </h3>
+
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="nombreProducto">
+                                Nombre del producto *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombreProducto"
+                                name="nombre"
+                                placeholder="Ej: Remera básica"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="codigoProducto">
+                                Código del producto
+                            </label>
+
+                            <input
+                                type="text"
+                                id="codigoProducto"
+                                name="codigo"
+                                placeholder="Ej: REM-001"
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="categoriaProducto">
+                                Categoría *
+                            </label>
+
+                            <select
+                                id="categoriaProducto"
+                                name="categoria"
+                                required
+                            >
+
+                                <option value="">
+                                    Seleccionar categoría
+                                </option>
+
+                                <option value="ninas">
+                                    Niñas
+                                </option>
+
+                                <option value="ninos">
+                                    Niños
+                                </option>
+
+                                <option value="bebes">
+                                    Bebés
+                                </option>
+
+                                <option value="accesorios">
+                                    Accesorios
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="subcategoriaProducto">
+                                Subcategoría
+                            </label>
+
+                            <select
+                                id="subcategoriaProducto"
+                                name="subcategoria"
+                            >
+
+                                <option value="">
+                                    Seleccionar
+                                </option>
+
+                                <option value="remeras">
+                                    Remeras
+                                </option>
+
+                                <option value="pantalones">
+                                    Pantalones
+                                </option>
+
+                                <option value="vestidos">
+                                    Vestidos
+                                </option>
+
+                                <option value="buzos">
+                                    Buzos
+                                </option>
+
+                                <option value="camperas">
+                                    Camperas
+                                </option>
+
+                                <option value="conjuntos">
+                                    Conjuntos
+                                </option>
+
+                                <option value="otros">
+                                    Otros
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="descripcionProducto">
+
+                            Descripción
+
+                        </label>
+
+                        <textarea
+                            id="descripcionProducto"
+                            name="descripcion"
+                            rows="5"
+                            placeholder="Describí el producto..."
+                        ></textarea>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     IMÁGENES
+                ================================== -->
+
+                <div class="form-card">
+
+
+                    <h3>
+                        Imágenes del producto
+                    </h3>
+
+                    <p class="form-help">
+                        Podés agregar hasta 5 imágenes.
+                    </p>
+
+
+
+                    <div class="image-upload">
+
+
+                        <label for="imagenesProducto">
+
+
+                            <span>
+                                📷
+                            </span>
+
+
+                            <strong>
+                                Subir imágenes
+                            </strong>
+
+
+                            <small>
+                                JPG, PNG o WEBP
+                            </small>
+
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="imagenesProducto"
+                            name="imagenes"
+                            accept="image/jpeg,image/png,image/webp"
+                            multiple
+                        >
+
+
+                    </div>
+
+
+
+                    <div
+                        class="image-preview"
+                        id="vistaPreviaImagenes"
+                    >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     PRECIO Y STOCK
+                ================================== -->
+
+                <div class="form-card">
+
+
+                    <h3>
+                        Precio y stock
+                    </h3>
+
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="precioProducto">
+                                Precio *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="precioProducto"
+                                name="precio"
+                                min="0"
+                                step="0.01"
+                                placeholder="0.00"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="precioAnterior">
+                                Precio anterior
+                            </label>
+
+                            <input
+                                type="number"
+                                id="precioAnterior"
+                                name="precioAnterior"
+                                min="0"
+                                step="0.01"
+                                placeholder="0.00"
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="stockProducto">
+                                Stock total *
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stockProducto"
+                                name="stock"
+                                min="0"
+                                placeholder="0"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="stockMinimo">
+                                Stock mínimo
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stockMinimo"
+                                name="stockMinimo"
+                                min="0"
+                                value="2"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     TALLES Y COLORES
+                ================================== -->
+
+                <div class="form-card">
+
+
+                    <h3>
+                        Talles y colores
+                    </h3>
+
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Talles disponibles
+                        </label>
+
+
+
+                        <div class="checkbox-group">
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="0-3M"
+                                >
+                                0-3M
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="3-6M"
+                                >
+                                3-6M
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="6-12M"
+                                >
+                                6-12M
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="1"
+                                >
+                                Talle 1
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="2"
+                                >
+                                Talle 2
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="4"
+                                >
+                                Talle 4
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="6"
+                                >
+                                Talle 6
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="8"
+                                >
+                                Talle 8
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="10"
+                                >
+                                Talle 10
+                            </label>
+
+
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="talles"
+                                    value="12"
+                                >
+                                Talle 12
+                            </label>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+
+                        <label for="coloresProducto">
+
+                            Colores disponibles
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="coloresProducto"
+                            name="colores"
+                            placeholder="Ej: Rosa, Blanco, Celeste"
+                        >
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     PUBLICACIÓN
+                ================================== -->
+
+                <div class="form-card">
+
+
+                    <h3>
+                        Publicación
+                    </h3>
+
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+
+                            <label for="estadoProducto">
+                                Estado
+                            </label>
+
+
+                            <select
+                                id="estadoProducto"
+                                name="estado"
+                            >
+
+                                <option value="activo">
+                                    Activo
+                                </option>
+
+                                <option value="oculto">
+                                    Oculto
+                                </option>
+
+                            </select>
+
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+
+                            <label for="etiquetaProducto">
+                                Etiqueta
+                            </label>
+
+
+                            <select
+                                id="etiquetaProducto"
+                                name="etiqueta"
+                            >
+
+                                <option value="">
+                                    Sin etiqueta
+                                </option>
+
+                                <option value="nuevo">
+                                    Nuevo
+                                </option>
+
+                                <option value="oferta">
+                                    Oferta
+                                </option>
+
+                                <option value="destacado">
+                                    Destacado
+                                </option>
+
+                            </select>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     BOTONES
+                ================================== -->
+
+                <div class="form-actions">
+
+
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        id="btnCancelarProducto"
+                    >
+
+                        Cancelar
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="admin-button"
+                    >
+
+                        Guardar producto
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/admin.js"></script>
+
+
+</body>
+
+</html>
+

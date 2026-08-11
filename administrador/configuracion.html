@@ -1,0 +1,475 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Configuración - CHAMAQUITOS</title>
+
+    <link
+        rel="stylesheet"
+        href="estilos_admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-container">
+
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+
+            <h2>CHAMAQUITOS</h2>
+
+            <span>
+                Panel de administración
+            </span>
+
+        </div>
+
+
+        <nav class="admin-menu">
+
+            <a href="panel.html">
+
+                <span>📊</span>
+
+                Panel principal
+
+            </a>
+
+
+            <a href="productos.html">
+
+                <span>📦</span>
+
+                Productos
+
+            </a>
+
+
+            <a href="pedidos.html">
+
+                <span>🛒</span>
+
+                Pedidos
+
+            </a>
+
+
+            <a href="ventas.html">
+
+                <span>📊</span>
+
+                Ventas
+
+            </a>
+
+
+            <a href="clientes.html">
+
+                <span>👥</span>
+
+                Clientes
+
+            </a>
+
+
+            <a
+                href="configuracion.html"
+                class="active"
+            >
+
+                <span>⚙️</span>
+
+                Configuración
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <div class="admin-header">
+
+            <div>
+
+                <h1>
+                    Configuración
+                </h1>
+
+                <p>
+                    Configura los datos y el funcionamiento de tu tienda.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             DATOS DE LA TIENDA
+        ========================================== -->
+
+        <section class="admin-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Datos de la tienda
+                    </h2>
+
+                    <p>
+                        Información general de CHAMAQUITOS.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="config-form">
+
+
+                <div class="form-group">
+
+                    <label for="nombre-tienda">
+                        Nombre de la tienda
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre-tienda"
+                        value="CHAMAQUITOS"
+                        placeholder="Nombre de la tienda"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="telefono-tienda">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefono-tienda"
+                        placeholder="Ej: 3834 000000"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email-tienda">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email-tienda"
+                        placeholder="correo@ejemplo.com"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="direccion-tienda">
+                        Dirección
+                    </label>
+
+                    <input
+                        type="text"
+                        id="direccion-tienda"
+                        placeholder="Dirección de la tienda"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             CONFIGURACIÓN DE PEDIDOS
+        ========================================== -->
+
+        <section class="admin-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Pedidos
+                    </h2>
+
+                    <p>
+                        Configura el funcionamiento de los pedidos.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="config-form">
+
+
+                <div class="form-group">
+
+                    <label for="pedido-minimo">
+                        Compra mínima
+                    </label>
+
+                    <input
+                        type="number"
+                        id="pedido-minimo"
+                        min="0"
+                        step="100"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="estado-predeterminado">
+                        Estado inicial del pedido
+                    </label>
+
+                    <select
+                        id="estado-predeterminado"
+                    >
+
+                        <option value="pendiente">
+                            Pendiente
+                        </option>
+
+                        <option value="confirmado">
+                            Confirmado
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group checkbox-group">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="permitir-pedidos"
+                            checked
+                        >
+
+                        Permitir recibir nuevos pedidos
+
+                    </label>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             MONEDA
+        ========================================== -->
+
+        <section class="admin-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Moneda
+                    </h2>
+
+                    <p>
+                        Configura cómo se mostrarán los precios.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="config-form">
+
+
+                <div class="form-group">
+
+                    <label for="moneda">
+                        Moneda
+                    </label>
+
+                    <select id="moneda">
+
+                        <option value="ARS">
+                            Peso argentino (ARS)
+                        </option>
+
+                        <option value="USD">
+                            Dólar estadounidense (USD)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="decimales">
+                        Decimales
+                    </label>
+
+                    <select id="decimales">
+
+                        <option value="0">
+                            Sin decimales
+                        </option>
+
+                        <option value="2">
+                            2 decimales
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             APARIENCIA
+        ========================================== -->
+
+        <section class="admin-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Apariencia
+                    </h2>
+
+                    <p>
+                        Personaliza la apariencia del panel.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="config-form">
+
+
+                <div class="form-group">
+
+                    <label for="tema">
+                        Tema
+                    </label>
+
+                    <select id="tema">
+
+                        <option value="claro">
+                            Claro
+                        </option>
+
+                        <option value="oscuro">
+                            Oscuro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             GUARDAR
+        ========================================== -->
+
+        <div class="config-actions">
+
+            <button
+                type="button"
+                id="btn-guardar-configuracion"
+                class="btn-primary"
+            >
+
+                Guardar configuración
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="mensaje-configuracion"
+            class="mensaje-configuracion"
+        ></div>
+
+
+    </main>
+
+</div>
+
+
+
+<script src="configuracion.js"></script>
+
+</body>
+
+</html>

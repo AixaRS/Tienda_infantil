@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Panel de administración | CHAMAQUITOS
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="estilos_admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-container">
+
+
+    <!-- =========================================
+        BARRA LATERAL
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="admin-logo">
+
+            <h2>
+                CHAMAQUITOS
+            </h2>
+
+            <span>
+                Panel de administración
+            </span>
+
+        </div>
+
+
+
+        <nav class="admin-menu">
+
+
+            <a
+                href="panel.html"
+                class="active"
+            >
+
+                <span>📊</span>
+
+                Panel principal
+
+            </a>
+
+
+
+            <a href="productos.html">
+
+                <span>📦</span>
+
+                Productos
+
+            </a>
+
+
+
+            <a href="pedidos.html">
+
+                <span>🛒</span>
+
+                Pedidos
+
+            </a>
+
+
+
+            <a href="ventas.html">
+
+                <span>📊</span>
+
+                Ventas
+
+            </a>
+
+
+
+            <a href="clientes.html">
+
+                <span>👥</span>
+
+                Clientes
+
+            </a>
+
+
+
+            <a href="configuracion.html">
+
+                <span>⚙️</span>
+
+                Configuración
+
+            </a>
+
+
+        </nav>
+
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/Inicio.html">
+
+                ← Ver tienda
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+
+        <!-- =====================================
+             ENCABEZADO
+        ====================================== -->
+
+        <header class="admin-header">
+
+
+            <div>
+
+                <span class="admin-eyebrow">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Panel principal
+                </h1>
+
+                <p>
+                    Bienvenido al panel de administración.
+                </p>
+
+            </div>
+
+
+
+            <div class="admin-header-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnActualizarPanel"
+                >
+
+                    ↻
+                    Actualizar
+
+                </button>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =====================================
+             RESUMEN
+        ====================================== -->
+
+        <section class="dashboard-grid">
+
+
+
+            <!-- PRODUCTOS -->
+
+            <div class="dashboard-card">
+
+                <span>
+                    Productos
+                </span>
+
+                <strong id="totalProductosPanel">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- STOCK -->
+
+            <div class="dashboard-card">
+
+                <span>
+                    Productos en stock
+                </span>
+
+                <strong id="productosStockPanel">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- PEDIDOS -->
+
+            <div class="dashboard-card">
+
+                <span>
+                    Pedidos
+                </span>
+
+                <strong id="totalPedidosPanel">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- VENTAS -->
+
+            <div class="dashboard-card">
+
+                <span>
+                    Ventas
+                </span>
+
+                <strong id="totalVentasPanel">
+                    $0
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACCIONES RÁPIDAS
+        ====================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        ACCESOS
+                    </span>
+
+                    <h2>
+                        Acciones rápidas
+                    </h2>
+
+                    <p>
+                        Administrá tu tienda rápidamente.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="quick-actions">
+
+
+
+                <!-- AGREGAR PRODUCTO -->
+
+                <a
+                    href="productos.html"
+                    class="quick-action"
+                >
+
+                    <span class="quick-icon">
+                        ➕
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Agregar producto
+                        </strong>
+
+                        <p>
+                            Cargar una nueva prenda.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- PRODUCTOS -->
+
+                <a
+                    href="productos.html"
+                    class="quick-action"
+                >
+
+                    <span class="quick-icon">
+                        📦
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Administrar productos
+                        </strong>
+
+                        <p>
+                            Editar o eliminar productos.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- PEDIDOS -->
+
+                <a
+                    href="pedidos.html"
+                    class="quick-action"
+                >
+
+                    <span class="quick-icon">
+                        🛒
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Ver pedidos
+                        </strong>
+
+                        <p>
+                            Revisar pedidos realizados.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- VENTAS -->
+
+                <a
+                    href="ventas.html"
+                    class="quick-action"
+                >
+
+                    <span class="quick-icon">
+                        💰
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Ver ventas
+                        </strong>
+
+                        <p>
+                            Consultar las ventas de la tienda.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- TIENDA -->
+
+                <a
+                    href="/Inicio.html"
+                    class="quick-action"
+                >
+
+                    <span class="quick-icon">
+                        🏪
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Ver tienda
+                        </strong>
+
+                        <p>
+                            Ver cómo la ven los clientes.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             PRODUCTOS RECIENTES
+        ====================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        CATÁLOGO
+                    </span>
+
+                    <h2>
+                        Productos recientes
+                    </h2>
+
+                    <p>
+                        Últimos productos agregados.
+                    </p>
+
+                </div>
+
+
+
+                <a
+                    href="productos.html"
+                    class="view-all"
+                >
+
+                    Ver todos
+
+                </a>
+
+
+            </div>
+
+
+
+            <div class="table-container">
+
+
+                <table class="admin-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Producto
+                            </th>
+
+                            <th>
+                                Categoría
+                            </th>
+
+                            <th>
+                                Precio
+                            </th>
+
+                            <th>
+                                Stock
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="productosRecientes">
+
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="empty-table"
+                            >
+
+                                <span>
+                                    📦
+                                </span>
+
+                                <p>
+                                    Todavía no hay productos.
+                                </p>
+
+
+                                <a href="productos.html">
+
+                                    Agregar el primer producto
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             ESTADO DEL INVENTARIO
+        ====================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        INVENTARIO
+                    </span>
+
+                    <h2>
+                        Estado del inventario
+                    </h2>
+
+                    <p>
+                        Información importante sobre tu stock.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="inventory-alerts">
+
+
+                <!-- SIN PRODUCTOS -->
+
+                <div
+                    class="alert"
+                    id="alertaSinProductos"
+                >
+
+                    <span>
+                        📦
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Sin productos
+                        </strong>
+
+                        <p>
+                            Todavía no cargaste productos
+                            en tu tienda.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STOCK BAJO -->
+
+                <div
+                    class="alert"
+                    id="alertaStockBajo"
+                >
+
+                    <span>
+                        ⚠️
+                    </span>
+
+
+                    <div>
+
+                        <strong>
+                            Stock bajo
+                        </strong>
+
+                        <p>
+                            Aquí aparecerán los productos
+                            con poco stock.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/admin.js"></script>
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Carrito | Nombre de la tienda
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         BARRA SUPERIOR
+    ====================================== -->
+
+    <div class="topbar">
+
+        Envíos a todo el país
+        ·
+        Consultas por WhatsApp
+
+    </div>
+
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header>
+
+        <nav class="nav">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="inicio.html"
+                class="logo"
+            >
+
+                NOMBRE DE LA TIENDA
+
+            </a>
+
+
+
+            <!-- MENÚ -->
+
+            <div class="menu">
+
+                <a href="inicio.html">
+                    Inicio
+                </a>
+
+                <a href="inicio.html#categorias">
+                    Categorías
+                </a>
+
+                <a href="inicio.html#novedades">
+                    Novedades
+                </a>
+
+                <a href="inicio.html#ofertas">
+                    Ofertas
+                </a>
+
+            </div>
+
+
+
+            <!-- ICONOS -->
+
+            <div class="icons">
+
+                <button
+                    type="button"
+                    id="btnBuscar"
+                    aria-label="Buscar"
+                >
+                    ⌕
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnFavoritos"
+                    aria-label="Favoritos"
+                >
+                    ♡
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnCarrito"
+                    aria-label="Carrito"
+                >
+                    🛒
+                </button>
+
+            </div>
+
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =====================================
+         CONTENIDO
+    ====================================== -->
+
+    <main class="carrito-main">
+
+
+        <!-- =================================
+             ENCABEZADO
+        ================================== -->
+
+        <section class="carrito-header">
+
+            <span class="section-eyebrow">
+                TU COMPRA
+            </span>
+
+            <h1>
+                Mi carrito
+            </h1>
+
+            <p>
+                Revisá tus productos antes de realizar el pedido.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================
+             CONTENIDO DEL CARRITO
+        ================================== -->
+
+        <section class="carrito-section">
+
+
+            <!-- PRODUCTOS -->
+
+            <div
+                class="carrito-productos"
+                id="listaCarrito"
+            >
+
+                <!--
+                    carrito.js generará
+                    los productos aquí.
+                -->
+
+            </div>
+
+
+
+            <!-- RESUMEN -->
+
+            <aside class="carrito-resumen">
+
+                <h2>
+                    Resumen del pedido
+                </h2>
+
+
+                <div class="resumen-linea">
+
+                    <span>
+                        Productos
+                    </span>
+
+                    <strong id="cantidadCarrito">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="resumen-linea">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="subtotalCarrito">
+                        $0
+                    </strong>
+
+                </div>
+
+
+                <div class="resumen-linea">
+
+                    <span>
+                        Envío
+                    </span>
+
+                    <strong>
+                        A coordinar
+                    </strong>
+
+                </div>
+
+
+                <div class="resumen-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="totalCarrito">
+                        $0
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-finalizar"
+                    id="btnFinalizarCompra"
+                >
+
+                    REALIZAR PEDIDO
+
+                </button>
+
+
+                <a
+                    href="inicio.html"
+                    class="btn-seguir-comprando"
+                >
+
+                    ← Seguir comprando
+
+                </a>
+
+            </aside>
+
+
+        </section>
+
+
+
+        <!-- =================================
+             CARRITO VACÍO
+        ================================== -->
+
+        <section
+            class="carrito-vacio"
+            id="carritoVacio"
+            hidden
+        >
+
+            <div class="carrito-vacio-icon">
+                🛍️
+            </div>
+
+
+            <h2>
+                Tu carrito está vacío
+            </h2>
+
+
+            <p>
+                Todavía no agregaste ningún producto.
+            </p>
+
+
+            <a
+                href="inicio.html"
+                class="btn"
+            >
+
+                VER PRODUCTOS
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+
+            <div class="footer-brand">
+
+                <strong>
+                    NOMBRE DE LA TIENDA
+                </strong>
+
+                <p>
+                    Ropa infantil
+                    ·
+                    Catamarca, Argentina
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-links">
+
+
+                <div>
+
+                    <strong>
+                        TIENDA
+                    </strong>
+
+                    <a href="inicio.html#categorias">
+                        Categorías
+                    </a>
+
+                    <a href="inicio.html#novedades">
+                        Novedades
+                    </a>
+
+                    <a href="inicio.html#ofertas">
+                        Ofertas
+                    </a>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        AYUDA
+                    </strong>
+
+                    <a href="#">
+                        Contacto
+                    </a>
+
+                    <a href="#">
+                        Envíos
+                    </a>
+
+                    <a href="#">
+                        Cambios y devoluciones
+                    </a>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        SEGUINOS
+                    </strong>
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+                    <a href="#">
+                        WhatsApp
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 Nombre de la tienda.
+                Todos los derechos reservados.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/carrito.js"></script>
+
+
+</body>
+
+</html>
+

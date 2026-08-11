@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Ventas | Administrador
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="estilos_admin.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="admin-container">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="admin-logo">
+
+            <h2>CHAMAQUITOS</h2>
+
+            <span>
+                Panel de administración
+            </span>
+
+        </div>
+
+
+        <nav class="admin-menu">
+
+            <a href="panel.html">
+
+                <span>📊</span>
+
+                Panel principal
+
+            </a>
+
+
+            <a href="productos.html">
+
+                <span>📦</span>
+
+                Productos
+
+            </a>
+
+
+            <a href="pedidos.html">
+
+                <span>🛒</span>
+
+                Pedidos
+
+            </a>
+
+
+            <a
+                href="ventas.html"
+                class="active"
+            >
+
+                <span>📊</span>
+
+                Ventas
+
+            </a>
+
+
+            <a href="clientes.html">
+
+                <span>👥</span>
+
+                Clientes
+
+            </a>
+
+
+            <a href="configuracion.html">
+
+                <span>⚙️</span>
+
+                Configuración
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/Inicio.html">
+
+                ← Ver tienda
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         CONTENIDO PRINCIPAL
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- =====================================
+             ENCABEZADO
+        ====================================== -->
+
+        <header class="admin-header">
+
+            <div>
+
+                <span class="admin-eyebrow">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Ventas
+                </h1>
+
+                <p>
+                    Consultá y analizá las ventas realizadas en tu tienda.
+                </p>
+
+            </div>
+
+
+            <div class="admin-header-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="btnActualizarVentas"
+                >
+
+                    ↻
+                    Actualizar
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             RESUMEN
+        ====================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Ventas de hoy
+                </span>
+
+                <strong id="ventasHoy">
+                    $0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Ventas del mes
+                </span>
+
+                <strong id="ventasMes">
+                    $0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Pedidos vendidos
+                </span>
+
+                <strong id="pedidosVendidos">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <span>
+                    Ticket promedio
+                </span>
+
+                <strong id="ticketPromedio">
+                    $0
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             FILTROS
+        ====================================== -->
+
+        <section class="admin-filters">
+
+
+            <div class="filter-group">
+
+                <label for="buscarVenta">
+
+                    Buscar
+
+                </label>
+
+                <input
+                    type="search"
+                    id="buscarVenta"
+                    placeholder="Nombre o número de pedido..."
+                >
+
+            </div>
+
+
+
+            <div class="filter-group">
+
+                <label for="filtroVentaEstado">
+
+                    Estado
+
+                </label>
+
+                <select id="filtroVentaEstado">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="pendiente">
+                        Pendiente
+                    </option>
+
+                    <option value="confirmado">
+                        Confirmado
+                    </option>
+
+                    <option value="preparando">
+                        Preparando
+                    </option>
+
+                    <option value="enviado">
+                        Enviado
+                    </option>
+
+                    <option value="entregado">
+                        Entregado
+                    </option>
+
+                    <option value="cancelado">
+                        Cancelado
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="filter-group">
+
+                <label for="filtroVentaFecha">
+
+                    Fecha
+
+                </label>
+
+                <select id="filtroVentaFecha">
+
+                    <option value="">
+                        Todas
+                    </option>
+
+                    <option value="hoy">
+                        Hoy
+                    </option>
+
+                    <option value="7">
+                        Últimos 7 días
+                    </option>
+
+                    <option value="30">
+                        Últimos 30 días
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             LISTADO DE VENTAS
+        ====================================== -->
+
+        <section class="admin-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        VENTAS
+                    </span>
+
+                    <h2>
+                        Historial de ventas
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table class="admin-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Pedido
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Fecha
+                            </th>
+
+                            <th>
+                                Productos
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Estado
+                            </th>
+
+                            <th>
+                                Acciones
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="listaVentas">
+
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="empty-table"
+                            >
+
+                                <span>
+                                    💰
+                                </span>
+
+                                <p>
+                                    No hay ventas registradas todavía.
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================================
+     MODAL DETALLE DE VENTA
+========================================== -->
+
+<div
+    class="modal"
+    id="modalVenta"
+    hidden
+>
+
+
+    <div class="modal-overlay"></div>
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <span class="section-eyebrow">
+                    DETALLE
+                </span>
+
+                <h2 id="modalVentaTitulo">
+                    Venta
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarModalVenta"
+                aria-label="Cerrar"
+            >
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <div
+            class="modal-body"
+            id="detalleVenta"
+        >
+
+            <!-- ventas.js cargará aquí el detalle -->
+
+        </div>
+
+
+
+        <div class="modal-footer">
+
+
+            <button
+                type="button"
+                class="btn-secondary"
+                id="btnCerrarModalVentaFooter"
+            >
+
+                Cerrar
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="../js/ventas.js"></script>
+
+
+</body>
+
+</html>
+
