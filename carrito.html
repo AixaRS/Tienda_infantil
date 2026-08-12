@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,10 +10,14 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Carrito | Nombre de la tienda
-    </title>
+    <meta
+        name="description"
+        content="Carrito de compras - Chamaquitos"
+    >
 
+    <title>Mi carrito | Chamaquitos</title>
+
+    <!-- CSS PRINCIPAL -->
     <link
         rel="stylesheet"
         href="estilos.css"
@@ -26,27 +29,13 @@
 <body>
 
 
-    <!-- =====================================
-         BARRA SUPERIOR
-    ====================================== -->
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
 
-    <div class="topbar">
+    <header class="encabezado">
 
-        Envíos a todo el país
-        ·
-        Consultas por WhatsApp
-
-    </div>
-
-
-
-    <!-- =====================================
-         HEADER
-    ====================================== -->
-
-    <header>
-
-        <nav class="nav">
+        <div class="encabezado-contenido">
 
 
             <!-- LOGO -->
@@ -55,228 +44,281 @@
                 href="inicio.html"
                 class="logo"
             >
-
-                NOMBRE DE LA TIENDA
-
+                Chamaquitos
             </a>
 
 
+            <!-- NAVEGACIÓN -->
 
-            <!-- MENÚ -->
-
-            <div class="menu">
+            <nav class="navegacion">
 
                 <a href="inicio.html">
                     Inicio
                 </a>
 
-                <a href="inicio.html#categorias">
+                <a href="categoria.html">
                     Categorías
                 </a>
 
-                <a href="inicio.html#novedades">
+                <a href="novedades.html">
                     Novedades
                 </a>
 
-                <a href="inicio.html#ofertas">
+                <a href="ofertas.html">
                     Ofertas
                 </a>
 
-            </div>
-
-
-
-            <!-- ICONOS -->
-
-            <div class="icons">
-
-                <button
-                    type="button"
-                    id="btnBuscar"
-                    aria-label="Buscar"
+                <a
+                    href="carrito.html"
+                    class="activo"
                 >
-                    ⌕
-                </button>
+                    🛒 Carrito
 
+                    <span
+                        id="contadorCarrito"
+                        class="contador-carrito"
+                        style="display: none;"
+                    >
+                        0
+                    </span>
 
-                <button
-                    type="button"
-                    id="btnFavoritos"
-                    aria-label="Favoritos"
-                >
-                    ♡
-                </button>
+                </a>
 
+            </nav>
 
-                <button
-                    type="button"
-                    id="btnCarrito"
-                    aria-label="Carrito"
-                >
-                    🛒
-                </button>
-
-            </div>
-
-
-        </nav>
+        </div>
 
     </header>
 
 
 
-    <!-- =====================================
-         CONTENIDO
-    ====================================== -->
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
 
-    <main class="carrito-main">
-
-
-        <!-- =================================
-             ENCABEZADO
-        ================================== -->
-
-        <section class="carrito-header">
-
-            <span class="section-eyebrow">
-                TU COMPRA
-            </span>
-
-            <h1>
-                Mi carrito
-            </h1>
-
-            <p>
-                Revisá tus productos antes de realizar el pedido.
-            </p>
-
-        </section>
+    <main class="carrito-pagina">
 
 
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
 
-        <!-- =================================
+        <div class="carrito-encabezado">
+
+            <div>
+
+                <span class="carrito-subtitulo">
+                    TU COMPRA
+                </span>
+
+                <h1>
+                    Mi carrito
+                </h1>
+
+            </div>
+
+
+            <a
+                href="categoria.html"
+                class="btn-seguir-comprando"
+            >
+                ← Seguir comprando
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
              CONTENIDO DEL CARRITO
-        ================================== -->
+        ================================================== -->
 
-        <section class="carrito-section">
+        <section class="carrito-contenido">
 
 
-            <!-- PRODUCTOS -->
+            <!-- =================================================
+                 PRODUCTOS
+
+                 carrito.js cargará aquí los productos
+             ================================================== -->
 
             <div
-                class="carrito-productos"
                 id="listaCarrito"
+                class="lista-carrito"
             >
 
-                <!--
-                    carrito.js generará
-                    los productos aquí.
-                -->
+                <div class="carrito-cargando">
+
+                    <div class="carrito-spinner"></div>
+
+                    <p>
+                        Cargando carrito...
+                    </p>
+
+                </div>
 
             </div>
 
 
 
-            <!-- RESUMEN -->
+            <!-- =================================================
+                 RESUMEN DE COMPRA
+             ================================================== -->
 
-            <aside class="carrito-resumen">
+            <aside
+                id="resumenCarrito"
+                class="resumen-carrito"
+            >
 
-                <h2>
-                    Resumen del pedido
-                </h2>
+                <div class="resumen-contenido">
+
+                    <h2>
+                        Resumen de compra
+                    </h2>
 
 
-                <div class="resumen-linea">
+                    <div class="resumen-linea">
 
-                    <span>
-                        Productos
-                    </span>
+                        <span>
+                            Productos
+                        </span>
 
-                    <strong id="cantidadCarrito">
-                        0
-                    </strong>
+                        <strong id="cantidadResumen">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="resumen-linea">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="subtotalCarrito">
+                            $0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="resumen-linea resumen-envio">
+
+                        <span>
+                            Envío
+                        </span>
+
+                        <span id="envioCarrito">
+                            A consultar
+                        </span>
+
+                    </div>
+
+
+                    <div class="resumen-separador"></div>
+
+
+                    <div class="resumen-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="totalCarrito">
+                            $0
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="btnFinalizarCompra"
+                        class="btn-finalizar-compra"
+                    >
+                        Finalizar compra
+                    </button>
+
+
+                    <a
+                        href="categoria.html"
+                        class="btn-continuar-compra"
+                    >
+                        Seguir comprando
+                    </a>
 
                 </div>
 
 
-                <div class="resumen-linea">
+                <!-- INFORMACIÓN -->
 
-                    <span>
-                        Subtotal
-                    </span>
+                <div class="resumen-seguridad">
 
-                    <strong id="subtotalCarrito">
-                        $0
-                    </strong>
+                    <div class="seguridad-item">
+
+                        <span>
+                            🔒
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Compra segura
+                            </strong>
+
+                            <small>
+                                Tus datos están protegidos
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="seguridad-item">
+
+                        <span>
+                            🚚
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Envíos
+                            </strong>
+
+                            <small>
+                                Consultá las opciones disponibles
+                            </small>
+
+                        </div>
+
+                    </div>
 
                 </div>
-
-
-                <div class="resumen-linea">
-
-                    <span>
-                        Envío
-                    </span>
-
-                    <strong>
-                        A coordinar
-                    </strong>
-
-                </div>
-
-
-                <div class="resumen-total">
-
-                    <span>
-                        Total
-                    </span>
-
-                    <strong id="totalCarrito">
-                        $0
-                    </strong>
-
-                </div>
-
-
-                <button
-                    type="button"
-                    class="btn-finalizar"
-                    id="btnFinalizarCompra"
-                >
-
-                    REALIZAR PEDIDO
-
-                </button>
-
-
-                <a
-                    href="inicio.html"
-                    class="btn-seguir-comprando"
-                >
-
-                    ← Seguir comprando
-
-                </a>
 
             </aside>
-
 
         </section>
 
 
 
-        <!-- =================================
+        <!-- =================================================
              CARRITO VACÍO
-        ================================== -->
+
+             carrito.js puede utilizar este contenedor
+             cuando no existen productos.
+        ================================================== -->
 
         <section
-            class="carrito-vacio"
             id="carritoVacio"
-            hidden
+            class="carrito-vacio"
+            style="display: none;"
         >
 
-            <div class="carrito-vacio-icon">
-                🛍️
+            <div class="carrito-vacio-icono">
+                🛒
             </div>
 
 
@@ -287,127 +329,114 @@
 
             <p>
                 Todavía no agregaste ningún producto.
+                ¡Encontrá algo que te guste!
             </p>
 
 
             <a
-                href="inicio.html"
-                class="btn"
+                href="categoria.html"
+                class="btn-ir-tienda"
             >
-
-                VER PRODUCTOS
-
+                Ver productos
             </a>
 
         </section>
+
+
+
+        <!-- =================================================
+             MENSAJES
+        ================================================== -->
+
+        <div
+            id="mensajeCarrito"
+            class="mensaje-carrito"
+            role="alert"
+            aria-live="polite"
+        ></div>
 
 
     </main>
 
 
 
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
+    <!-- =====================================================
+         PIE DE PÁGINA
+    ====================================================== -->
 
-    <footer>
+    <footer class="footer">
 
-        <div class="footer-inner">
+        <div class="footer-contenido">
 
 
-            <div class="footer-brand">
+            <!-- COLUMNA 1 -->
 
-                <strong>
-                    NOMBRE DE LA TIENDA
-                </strong>
+            <div class="footer-columna">
+
+                <h3>
+                    Chamaquitos
+                </h3>
 
                 <p>
-                    Ropa infantil
-                    ·
-                    Catamarca, Argentina
+                    Ropa infantil pensada para acompañar
+                    cada aventura.
                 </p>
 
             </div>
 
 
 
-            <div class="footer-links">
+            <!-- COLUMNA 2 -->
 
+            <div class="footer-columna">
 
-                <div>
+                <h3>
+                    Comprar
+                </h3>
 
-                    <strong>
-                        TIENDA
-                    </strong>
+                <a href="categoria.html">
+                    Categorías
+                </a>
 
-                    <a href="inicio.html#categorias">
-                        Categorías
-                    </a>
+                <a href="novedades.html">
+                    Novedades
+                </a>
 
-                    <a href="inicio.html#novedades">
-                        Novedades
-                    </a>
-
-                    <a href="inicio.html#ofertas">
-                        Ofertas
-                    </a>
-
-                </div>
-
-
-
-                <div>
-
-                    <strong>
-                        AYUDA
-                    </strong>
-
-                    <a href="#">
-                        Contacto
-                    </a>
-
-                    <a href="#">
-                        Envíos
-                    </a>
-
-                    <a href="#">
-                        Cambios y devoluciones
-                    </a>
-
-                </div>
-
-
-
-                <div>
-
-                    <strong>
-                        SEGUINOS
-                    </strong>
-
-                    <a href="#">
-                        Instagram
-                    </a>
-
-                    <a href="#">
-                        WhatsApp
-                    </a>
-
-                </div>
-
+                <a href="ofertas.html">
+                    Ofertas
+                </a>
 
             </div>
+
+
+
+            <!-- COLUMNA 3 -->
+
+            <div class="footer-columna">
+
+                <h3>
+                    Mi cuenta
+                </h3>
+
+                <a href="carrito.html">
+                    Mi carrito
+                </a>
+
+                <a href="pedidos.html">
+                    Mis pedidos
+                </a>
+
+            </div>
+
+
 
         </div>
 
 
-
-        <div class="footer-bottom">
+        <div class="footer-copy">
 
             <p>
-
-                © 2026 Nombre de la tienda.
-                Todos los derechos reservados.
-
+                © 2026 Chamaquitos. Todos los derechos reservados.
             </p>
 
         </div>
@@ -416,14 +445,15 @@
 
 
 
-    <!-- =====================================
+    <!-- =====================================================
          JAVASCRIPT
-    ====================================== -->
+    ====================================================== -->
 
-    <script src="js/carrito.js"></script>
+    <script
+        src="js/carrito.js"
+    ></script>
 
 
 </body>
 
 </html>
-

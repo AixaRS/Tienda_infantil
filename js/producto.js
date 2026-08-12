@@ -1,6 +1,5 @@
-
 const CLAVE_PRODUCTOS = "tienda_productos";
-const CLAVE_CARRITO = "tienda_carrito";
+const CLAVE_CARRITO = "carrito";
 
 /* =========================================================
    INICIAR
@@ -10,66 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarProducto();
 });
 
+
 /* =========================================================
-   OBTENER ID DE LA URL
+   OBTENER ID DEL PRODUCTO DESDE LA URL
 ========================================================= */
 
 function obtenerIdProducto() {
 
-    const parametros = new URLSearchParams(
-        window.location.search
-    );
+    const parametros = new URLSearchParams(window.location.search);
 
     return parametros.get("id");
 }
 
-/* =========================================================
-   CARGAR PRODUCTO
-========================================================= */
-
-function cargarProducto() {
-
-    const contenedor = document.getElementById(
-        "productoDetalle"
-    );
-
-    if (!contenedor) {
-        console.error("No existe #productoDetalle");
-        return;
-    }
-
-    const id = obtenerIdProducto();
-
-    if (!id) {
-        mostrarError(
-            "No se especificó ningún producto."
-        );
-        return;
-    }
-
-    const productos = obtenerProductos();
-
-    const producto = productos.find(
-        item =>
-            String(item.id) === String(id)
-    );
-
-    if (!producto) {
-        mostrarError(
-            "El producto no existe o fue eliminado."
-        );
-        return;
-    }
-
-    if (producto.estado === "oculto") {
-        mostrarError(
-            "Este producto no está disponible."
-        );
-        return;
-    }
-
-    mostrarProducto(producto);
-}
 
 /* =========================================================
    OBTENER PRODUCTOS
@@ -77,26 +28,23 @@ function cargarProducto() {
 
 function obtenerProductos() {
 
-    const datos = localStorage.getItem(
-        CLAVE_PRODUCTOS
-    );
-
-    if (!datos) {
-        return [];
-    }
-
     try {
 
-        const productos = JSON.parse(datos);
+        const productosGuardados =
+            localStorage.getItem(CLAVE_PRODUCTOS);
 
-        return Array.isArray(productos)
-            ? productos
-            : [];
+        if (!productosGuardados) {
+            return [];
+        }
+
+        const productos = JSON.parse(productosGuardados);
+
+        return Array.isArray(productos) ? productos : [];
 
     } catch (error) {
 
         console.error(
-            "Error al leer los productos:",
+            "Error al obtener los productos:",
             error
         );
 
@@ -104,251 +52,395 @@ function obtenerProductos() {
     }
 }
 
+
+/* =========================================================
+   CARGAR PRODUCTO
+========================================================= */
+
+function cargarProducto() {
+
+    const contenedor =
+        document.getElementById("productoDetalle");
+
+    if (!contenedor) {
+        console.error(
+            "No se encontró #productoDetalle"
+        );
+        return;
+    }
+
+    const idProducto = obtenerIdProducto();
+
+    if (!idProducto) {
+
+        mostrarErrorProducto(
+            "No se especificó ningún producto."
+        );
+
+        return;
+    }
+
+
+    const productos = obtenerProductos();
+
+    const producto = productos.find(
+        producto =>
+            String(producto.id) === String(idProducto)
+    );
+
+
+    if (!producto) {
+
+        mostrarErrorProducto(
+            "El producto no existe o fue eliminado."
+        );
+
+        return;
+    }
+
+
+    mostrarProducto(
+        producto,
+        contenedor
+    );
+}
+
+
 /* =========================================================
    MOSTRAR PRODUCTO
 ========================================================= */
 
-function mostrarProducto(producto) {
+function mostrarProducto(producto, contenedor) {
 
-    const contenedor = document.getElementById(
-        "productoDetalle"
-    );
+    const imagenPrincipal =
+        obtenerImagenPrincipal(producto);
 
-    if (!contenedor) {
-        return;
-    }
+    const imagenes =
+        obtenerImagenes(producto);
 
-    const nombre = escaparHTML(
-        producto.nombre ||
-        "Producto sin nombre"
-    );
+    const precio =
+        obtenerPrecio(producto);
 
-    const descripcion = escaparHTML(
-        producto.descripcion ||
-        "Prenda infantil de excelente calidad."
-    );
+    const stock =
+        obtenerStock(producto);
 
-    const categoria = obtenerNombreCategoria(
-        producto.categoria
-    );
 
-    const precio = formatearPrecio(
-        producto.precio
-    );
+    document.title =
+        `${producto.nombre || "Producto"} | Chamaquitos`;
 
-    const stock = Number(
-        producto.stock || 0
-    );
-
-    const imagenes = obtenerImagenes(
-        producto
-    );
-
-    /* =====================================================
-       IMAGEN PRINCIPAL
-    ===================================================== */
-
-    let imagenHTML = "";
-
-    if (imagenes.length > 0) {
-
-        imagenHTML = `
-            <img
-                src="${escaparAtributo(imagenes[0])}"
-                alt="${nombre}"
-                class="producto-imagen-principal"
-                loading="eager"
-                onerror="imagenProductoError(this)"
-            >
-        `;
-
-    } else {
-
-        imagenHTML = `
-            <div class="producto-placeholder">
-                FOTO
-            </div>
-        `;
-    }
-
-    /* =====================================================
-       PRECIO ANTERIOR
-    ===================================================== */
-
-    let precioAnteriorHTML = "";
-
-    const precioAnterior = Number(
-        producto.precioAnterior || 0
-    );
-
-    const precioActual = Number(
-        producto.precio || 0
-    );
-
-    if (
-        precioAnterior > precioActual &&
-        precioActual > 0
-    ) {
-
-        precioAnteriorHTML = `
-            <span class="producto-precio-anterior">
-                ${formatearPrecio(precioAnterior)}
-            </span>
-        `;
-    }
-
-    /* =====================================================
-       ETIQUETA
-    ===================================================== */
-
-    let etiquetaHTML = "";
-
-    if (producto.etiqueta) {
-
-        etiquetaHTML = `
-            <div class="tag producto-tag">
-                ${escaparHTML(producto.etiqueta)}
-            </div>
-        `;
-    }
-
-    /* =====================================================
-       STOCK
-    ===================================================== */
-
-    let stockHTML = "";
-
-    if (stock > 0) {
-
-        stockHTML = `
-            <div class="stock disponible">
-                ● Stock disponible
-            </div>
-        `;
-
-    } else {
-
-        stockHTML = `
-            <div class="stock agotado">
-                Producto agotado
-            </div>
-        `;
-    }
-
-    /* =====================================================
-       TALLES
-    ===================================================== */
-
-    const tallesHTML = generarTallesHTML(
-        producto
-    );
-
-    /* =====================================================
-       COLORES
-    ===================================================== */
-
-    const coloresHTML = generarColoresHTML(
-        producto
-    );
-
-    /* =====================================================
-       BOTÓN CARRITO
-    ===================================================== */
-
-    let botonHTML = "";
-
-    if (stock > 0) {
-
-        botonHTML = `
-            <button
-                type="button"
-                class="btn-agregar-carrito"
-                onclick="agregarAlCarrito('${escaparAtributo(producto.id)}')"
-            >
-                AGREGAR AL CARRITO
-            </button>
-        `;
-
-    } else {
-
-        botonHTML = `
-            <button
-                type="button"
-                class="btn-agregar-carrito deshabilitado"
-                disabled
-            >
-                PRODUCTO AGOTADO
-            </button>
-        `;
-    }
-
-    /* =====================================================
-       HTML COMPLETO
-    ===================================================== */
 
     contenedor.innerHTML = `
 
-        <div class="producto-galeria">
+        <div class="producto-imagenes">
 
-            <div class="producto-imagen">
+            <div class="producto-imagen-principal">
 
-                ${etiquetaHTML}
-
-                ${imagenHTML}
+                <img
+                    id="imagenProductoPrincipal"
+                    src="${escaparHTML(imagenPrincipal)}"
+                    alt="${escaparHTML(producto.nombre || "Producto")}"
+                    onerror="this.src='img/sin-imagen.jpg'"
+                >
 
             </div>
 
+
+            ${
+                imagenes.length > 1
+                    ? `
+                        <div class="producto-miniaturas">
+
+                            ${imagenes.map((imagen, index) => `
+
+                                <button
+                                    type="button"
+                                    class="producto-miniatura ${index === 0 ? "activa" : ""}"
+                                    onclick="cambiarImagenProducto('${escaparHTML(imagen)}', this)"
+                                    aria-label="Ver imagen ${index + 1}"
+                                >
+
+                                    <img
+                                        src="${escaparHTML(imagen)}"
+                                        alt="${escaparHTML(producto.nombre || "Producto")} ${index + 1}"
+                                        onerror="this.style.display='none'"
+                                    >
+
+                                </button>
+
+                            `).join("")}
+
+                        </div>
+                    `
+                    : ""
+            }
+
         </div>
+
 
 
         <div class="producto-informacion">
 
             <div class="producto-categoria">
-                ${categoria}
+
+                ${escaparHTML(
+                    producto.categoria || "Ropa infantil"
+                )}
+
             </div>
 
-            <h1>
-                ${nombre}
+
+            <h1 class="producto-titulo">
+
+                ${escaparHTML(
+                    producto.nombre || "Producto sin nombre"
+                )}
+
             </h1>
+
 
             <div class="producto-precio">
 
-                ${precio}
-
-                ${precioAnteriorHTML}
+                ${formatearPrecio(precio)}
 
             </div>
 
-            <div class="producto-descripcion">
-                ${descripcion}
+
+            ${
+                producto.descripcion
+                    ? `
+                        <div class="producto-descripcion">
+
+                            <h2>
+                                Descripción
+                            </h2>
+
+                            <p>
+                                ${escaparHTML(producto.descripcion)}
+                            </p>
+
+                        </div>
+                    `
+                    : ""
+            }
+
+
+            ${
+                obtenerTalles(producto).length > 0
+                    ? `
+                        <div class="producto-opcion">
+
+                            <div class="producto-opcion-titulo">
+
+                                <span>
+                                    Talle
+                                </span>
+
+                                <span
+                                    id="talleSeleccionadoTexto"
+                                    class="opcion-seleccionada"
+                                >
+                                    Seleccioná un talle
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                id="selectorTalles"
+                                class="selector-talles"
+                            >
+
+                                ${generarTalles(producto)}
+
+                            </div>
+
+                        </div>
+                    `
+                    : ""
+            }
+
+
+            ${
+                obtenerColores(producto).length > 0
+                    ? `
+                        <div class="producto-opcion">
+
+                            <div class="producto-opcion-titulo">
+
+                                <span>
+                                    Color
+                                </span>
+
+                                <span
+                                    id="colorSeleccionadoTexto"
+                                    class="opcion-seleccionada"
+                                >
+                                    Seleccioná un color
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                id="selectorColores"
+                                class="selector-colores"
+                            >
+
+                                ${generarColores(producto)}
+
+                            </div>
+
+                        </div>
+                    `
+                    : ""
+            }
+
+
+            <div class="producto-opcion">
+
+                <div class="producto-opcion-titulo">
+
+                    <span>
+                        Cantidad
+                    </span>
+
+                </div>
+
+
+                <div class="selector-cantidad">
+
+                    <button
+                        type="button"
+                        id="btnRestarCantidad"
+                        class="cantidad-btn"
+                        aria-label="Disminuir cantidad"
+                    >
+                        −
+                    </button>
+
+
+                    <span
+                        id="cantidadProducto"
+                        class="cantidad-valor"
+                    >
+                        1
+                    </span>
+
+
+                    <button
+                        type="button"
+                        id="btnSumarCantidad"
+                        class="cantidad-btn"
+                        aria-label="Aumentar cantidad"
+                    >
+                        +
+                    </button>
+
+                </div>
+
             </div>
 
-            ${tallesHTML}
 
-            ${coloresHTML}
+            <div
+                id="mensajeProducto"
+                class="mensaje-producto"
+                role="alert"
+            ></div>
 
-            ${stockHTML}
 
-            <div class="producto-compra">
+            ${
+                stock > 0
+                    ? `
+                        <button
+                            type="button"
+                            id="btnAgregarCarrito"
+                            class="btn-agregar-carrito"
+                        >
+                            Agregar al carrito
+                        </button>
+                    `
+                    : `
+                        <button
+                            type="button"
+                            class="btn-agregar-carrito agotado"
+                            disabled
+                        >
+                            Producto agotado
+                        </button>
+                    `
+            }
 
-                ${crearSelectorCantidad(stock)}
 
-                ${botonHTML}
+            <a
+                href="categoria.html"
+                class="btn-volver-tienda"
+            >
+                ← Volver a la tienda
+            </a>
 
-            </div>
 
             <div class="producto-info-extra">
 
-                <div>
-                    🚚 Envíos a todo el país
+                <div class="producto-info-item">
+
+                    <span class="info-icono">
+                        🚚
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Envíos
+                        </strong>
+
+                        <small>
+                            Consultá las opciones disponibles
+                        </small>
+
+                    </div>
+
                 </div>
 
-                <div>
-                    ↩ Cambios y devoluciones
+
+                <div class="producto-info-item">
+
+                    <span class="info-icono">
+                        🔒
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Compra segura
+                        </strong>
+
+                        <small>
+                            Tus datos están protegidos
+                        </small>
+
+                    </div>
+
                 </div>
 
-                <div>
-                    💬 Consultas por WhatsApp
+
+                <div class="producto-info-item">
+
+                    <span class="info-icono">
+                        💬
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            ¿Tenés dudas?
+                        </strong>
+
+                        <small>
+                            Estamos para ayudarte
+                        </small>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -357,499 +449,429 @@ function mostrarProducto(producto) {
 
     `;
 
-    document.title =
-        `${producto.nombre || "Producto"} | Chamaquitos`;
-}
 
-/* =========================================================
-   SELECTOR DE CANTIDAD
-========================================================= */
-
-function crearSelectorCantidad(stock) {
-
-    if (stock <= 0) {
-        return "";
-    }
-
-    return `
-        <div class="cantidad">
-
-            <button
-                type="button"
-                onclick="cambiarCantidad(-1)"
-                aria-label="Disminuir cantidad"
-            >
-                −
-            </button>
-
-            <input
-                type="number"
-                id="cantidadProducto"
-                value="1"
-                min="1"
-                max="${stock}"
-                readonly
-            >
-
-            <button
-                type="button"
-                onclick="cambiarCantidad(1)"
-                aria-label="Aumentar cantidad"
-            >
-                +
-            </button>
-
-        </div>
-    `;
-}
-
-/* =========================================================
-   CAMBIAR CANTIDAD
-========================================================= */
-
-function cambiarCantidad(cambio) {
-
-    const input = document.getElementById(
-        "cantidadProducto"
-    );
-
-    if (!input) {
-        return;
-    }
-
-    const minimo = Number(
-        input.min || 1
-    );
-
-    const maximo = Number(
-        input.max || 999
-    );
-
-    let cantidad = Number(
-        input.value || 1
-    );
-
-    cantidad += cambio;
-
-    if (cantidad < minimo) {
-        cantidad = minimo;
-    }
-
-    if (cantidad > maximo) {
-        cantidad = maximo;
-    }
-
-    input.value = cantidad;
-}
-
-/* =========================================================
-   GENERAR TALLES
-========================================================= */
-
-function generarTallesHTML(producto) {
-
-    const talles = producto.talles;
-
-    if (
-        !Array.isArray(talles) ||
-        talles.length === 0
-    ) {
-        return "";
-    }
-
-    return `
-        <div class="producto-opcion">
-
-            <div class="producto-opcion-titulo">
-                Talle
-            </div>
-
-            <div
-                class="producto-opciones"
-                id="selectorTalle"
-            >
-
-                ${talles.map((talle) => {
-
-                    const valor =
-                        typeof talle === "object"
-                            ? talle.nombre
-                            : talle;
-
-                    const disponible =
-                        typeof talle === "object"
-                            ? Number(
-                                talle.stock ?? 1
-                              ) > 0
-                            : true;
-
-                    return `
-
-                        <button
-                            type="button"
-                            class="opcion-talle ${
-                                !disponible
-                                    ? "opcion-agotada"
-                                    : ""
-                            }"
-                            ${
-                                !disponible
-                                    ? "disabled"
-                                    : ""
-                            }
-                            data-talle="${escaparAtributo(valor)}"
-                            onclick="seleccionarTalle(this)"
-                        >
-
-                            ${escaparHTML(valor)}
-
-                        </button>
-
-                    `;
-
-                }).join("")}
-
-            </div>
-
-        </div>
-    `;
-}
-
-/* =========================================================
-   GENERAR COLORES
-========================================================= */
-
-function generarColoresHTML(producto) {
-
-    const colores = producto.colores;
-
-    if (
-        !Array.isArray(colores) ||
-        colores.length === 0
-    ) {
-        return "";
-    }
-
-    return `
-        <div class="producto-opcion">
-
-            <div class="producto-opcion-titulo">
-                Color
-            </div>
-
-            <div
-                class="producto-colores"
-                id="selectorColor"
-            >
-
-                ${colores.map((color) => {
-
-                    const valor =
-                        typeof color === "object"
-                            ? color.nombre
-                            : color;
-
-                    const disponible =
-                        typeof color === "object"
-                            ? Number(
-                                color.stock ?? 1
-                              ) > 0
-                            : true;
-
-                    const colorCSS =
-                        obtenerColorCSS(valor);
-
-                    return `
-
-                        <button
-                            type="button"
-                            class="opcion-color ${
-                                !disponible
-                                    ? "opcion-agotada"
-                                    : ""
-                            }"
-                            ${
-                                !disponible
-                                    ? "disabled"
-                                    : ""
-                            }
-                            data-color="${escaparAtributo(valor)}"
-                            title="${escaparAtributo(valor)}"
-                            style="--color-producto: ${escaparAtributo(colorCSS)};"
-                            onclick="seleccionarColor(this)"
-                        >
-
-                            <span
-                                class="color-circulo"
-                            ></span>
-
-                        </button>
-
-                    `;
-
-                }).join("")}
-
-            </div>
-
-        </div>
-    `;
-}
-
-/* =========================================================
-   CONVERTIR COLOR
-========================================================= */
-
-function obtenerColorCSS(color) {
-
-    const colores = {
-
-        rojo: "#e53935",
-
-        bordo: "#800020",
-        bordó: "#800020",
-        bordeaux: "#800020",
-
-        rosa: "#f48fb1",
-        rosado: "#f48fb1",
-
-        fucsia: "#d81b60",
-
-        naranja: "#ff9800",
-
-        amarillo: "#fdd835",
-
-        verde: "#43a047",
-        verde_claro: "#81c784",
-        verde_oscuro: "#1b5e20",
-
-        celeste: "#81d4fa",
-
-        azul: "#1e88e5",
-        azul_claro: "#64b5f6",
-        azul_oscuro: "#0d47a1",
-
-        violeta: "#8e24aa",
-
-        lila: "#ce93d8",
-
-        marron: "#795548",
-        marrón: "#795548",
-
-        beige: "#d7ccc8",
-
-        gris: "#9e9e9e",
-        gris_claro: "#eeeeee",
-        gris_oscuro: "#424242",
-
-        negro: "#111111",
-
-        blanco: "#ffffff",
-
-        natural: "#e6d3b1"
-    };
-
-    const nombre = String(color)
-        .toLowerCase()
-        .trim();
-
-    return colores[nombre] || nombre;
-}
-
-/* =========================================================
-   SELECCIONAR TALLE
-========================================================= */
-
-function seleccionarTalle(boton) {
-
-    if (!boton || boton.disabled) {
-        return;
-    }
-
-    document
-        .querySelectorAll(".opcion-talle")
-        .forEach(item => {
-
-            item.classList.remove(
-                "seleccionado"
-            );
-
-        });
-
-    boton.classList.add(
-        "seleccionado"
+    inicializarProducto(
+        producto,
+        stock
     );
 }
 
-/* =========================================================
-   SELECCIONAR COLOR
-========================================================= */
-
-function seleccionarColor(boton) {
-
-    if (!boton || boton.disabled) {
-        return;
-    }
-
-    document
-        .querySelectorAll(".opcion-color")
-        .forEach(item => {
-
-            item.classList.remove(
-                "seleccionado"
-            );
-
-        });
-
-    boton.classList.add(
-        "seleccionado"
-    );
-}
 
 /* =========================================================
-   OBTENER TALLE
+   INICIALIZAR PRODUCTO
 ========================================================= */
 
-function obtenerTalleSeleccionado() {
+function inicializarProducto(producto, stock) {
 
-    const boton = document.querySelector(
-        ".opcion-talle.seleccionado"
-    );
+    let cantidad = 1;
 
-    return boton
-        ? boton.dataset.talle || ""
-        : "";
-}
 
-/* =========================================================
-   OBTENER COLOR
-========================================================= */
+    const cantidadElemento =
+        document.getElementById("cantidadProducto");
 
-function obtenerColorSeleccionado() {
+    const btnRestar =
+        document.getElementById("btnRestarCantidad");
 
-    const boton = document.querySelector(
-        ".opcion-color.seleccionado"
-    );
+    const btnSumar =
+        document.getElementById("btnSumarCantidad");
 
-    return boton
-        ? boton.dataset.color || ""
-        : "";
-}
+    const btnAgregar =
+        document.getElementById("btnAgregarCarrito");
 
-/* =========================================================
-   AGREGAR AL CARRITO
-========================================================= */
 
-function agregarAlCarrito(id) {
+    /* =====================================================
+       CANTIDAD -
+    ===================================================== */
 
-    const productos = obtenerProductos();
+    if (btnRestar) {
 
-    const producto = productos.find(
-        item =>
-            String(item.id) ===
-            String(id)
-    );
+        btnRestar.addEventListener(
+            "click",
+            () => {
 
-    if (!producto) {
+                if (cantidad > 1) {
 
-        alert(
-            "No se encontró el producto."
+                    cantidad--;
+
+                    actualizarCantidad();
+
+                }
+
+            }
         );
 
-        return;
     }
 
-    const stock = Number(
-        producto.stock || 0
-    );
 
-    if (stock <= 0) {
+    /* =====================================================
+       CANTIDAD +
+    ===================================================== */
 
-        alert(
-            "Este producto está agotado."
+    if (btnSumar) {
+
+        btnSumar.addEventListener(
+            "click",
+            () => {
+
+                if (cantidad < stock) {
+
+                    cantidad++;
+
+                    actualizarCantidad();
+
+                } else {
+
+                    mostrarMensaje(
+                        `Solo hay ${stock} unidad${stock === 1 ? "" : "es"} disponible${stock === 1 ? "" : "s"}.`,
+                        "advertencia"
+                    );
+
+                }
+
+            }
         );
 
-        return;
     }
+
+
+    /* =====================================================
+       ACTUALIZAR CANTIDAD
+    ===================================================== */
+
+    function actualizarCantidad() {
+
+        if (cantidadElemento) {
+
+            cantidadElemento.textContent =
+                cantidad;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       AGREGAR AL CARRITO
+    ===================================================== */
+
+    if (btnAgregar) {
+
+        btnAgregar.addEventListener(
+            "click",
+            () => {
+
+                agregarAlCarrito(
+                    producto,
+                    cantidad
+                );
+
+            }
+        );
+
+    }
+
 
     /* =====================================================
        TALLE
     ===================================================== */
 
-    const tieneTalles =
-        Array.isArray(producto.talles) &&
-        producto.talles.length > 0;
-
-    const talle =
-        obtenerTalleSeleccionado();
-
-    if (
-        tieneTalles &&
-        !talle
-    ) {
-
-        alert(
-            "Por favor, seleccioná un talle."
+    const botonesTalle =
+        document.querySelectorAll(
+            ".btn-talle"
         );
 
-        return;
-    }
+
+    botonesTalle.forEach(
+        boton => {
+
+            boton.addEventListener(
+                "click",
+                () => {
+
+                    botonesTalle.forEach(
+                        btn =>
+                            btn.classList.remove("seleccionado")
+                    );
+
+
+                    boton.classList.add(
+                        "seleccionado"
+                    );
+
+
+                    const texto =
+                        document.getElementById(
+                            "talleSeleccionadoTexto"
+                        );
+
+
+                    if (texto) {
+
+                        texto.textContent =
+                            boton.dataset.talle;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
 
     /* =====================================================
        COLOR
     ===================================================== */
 
-    const tieneColores =
-        Array.isArray(producto.colores) &&
-        producto.colores.length > 0;
+    const botonesColor =
+        document.querySelectorAll(
+            ".btn-color"
+        );
 
-    const color =
-        obtenerColorSeleccionado();
 
-    if (
-        tieneColores &&
-        !color
-    ) {
+    botonesColor.forEach(
+        boton => {
 
-        alert(
-            "Por favor, seleccioná un color."
+            boton.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        boton.disabled ||
+                        boton.classList.contains("agotado")
+                    ) {
+                        return;
+                    }
+
+
+                    botonesColor.forEach(
+                        btn =>
+                            btn.classList.remove(
+                                "seleccionado"
+                            )
+                    );
+
+
+                    boton.classList.add(
+                        "seleccionado"
+                    );
+
+
+                    const texto =
+                        document.getElementById(
+                            "colorSeleccionadoTexto"
+                        );
+
+
+                    if (texto) {
+
+                        texto.textContent =
+                            boton.dataset.color;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   GENERAR TALLES
+========================================================= */
+
+function generarTalles(producto) {
+
+    const talles =
+        obtenerTalles(producto);
+
+
+    return talles.map(
+        talle => `
+
+            <button
+                type="button"
+                class="btn-talle"
+                data-talle="${escaparHTML(talle)}"
+            >
+
+                ${escaparHTML(talle)}
+
+            </button>
+
+        `
+    ).join("");
+}
+
+
+/* =========================================================
+   GENERAR COLORES
+========================================================= */
+
+function generarColores(producto) {
+
+    const colores =
+        obtenerColores(producto);
+
+
+    return colores.map(
+        color => {
+
+            const nombre =
+                typeof color === "string"
+                    ? color
+                    : color.nombre || color.name || "";
+
+
+            const codigo =
+                typeof color === "string"
+                    ? obtenerCodigoColor(color)
+                    : color.codigo ||
+                      color.hex ||
+                      obtenerCodigoColor(nombre);
+
+
+            const agotado =
+                typeof color === "object" &&
+                (
+                    color.stock === 0 ||
+                    color.agotado === true
+                );
+
+
+            return `
+
+                <button
+                    type="button"
+                    class="btn-color ${agotado ? "agotado" : ""}"
+                    data-color="${escaparHTML(nombre)}"
+                    title="${escaparHTML(nombre)}"
+                    aria-label="Color ${escaparHTML(nombre)}"
+                    ${agotado ? "disabled" : ""}
+                >
+
+                    <span
+                        class="bolita-color"
+                        style="background-color: ${escaparHTML(codigo)}"
+                    ></span>
+
+                    ${
+                        agotado
+                            ? `
+                                <span class="color-agotado">
+                                    ×
+                                </span>
+                            `
+                            : ""
+                    }
+
+                </button>
+
+            `;
+
+        }
+    ).join("");
+}
+
+
+/* =========================================================
+   AGREGAR AL CARRITO
+========================================================= */
+
+function agregarAlCarrito(
+    producto,
+    cantidad
+) {
+
+    const talleElemento =
+        document.querySelector(
+            ".btn-talle.seleccionado"
+        );
+
+
+    const colorElemento =
+        document.querySelector(
+            ".btn-color.seleccionado"
+        );
+
+
+    const talles =
+        obtenerTalles(producto);
+
+
+    const colores =
+        obtenerColores(producto);
+
+
+    /* =====================================================
+       VALIDAR TALLE
+    ===================================================== */
+
+    if (talles.length > 0 && !talleElemento) {
+
+        mostrarMensaje(
+            "Seleccioná un talle antes de agregar el producto.",
+            "error"
         );
 
         return;
     }
 
-    /* =====================================================
-       CANTIDAD
-    ===================================================== */
-
-    const inputCantidad =
-        document.getElementById(
-            "cantidadProducto"
-        );
-
-    const cantidad =
-        Math.max(
-            1,
-            Number(
-                inputCantidad?.value || 1
-            )
-        );
 
     /* =====================================================
-       CARGAR CARRITO
+       VALIDAR COLOR
     ===================================================== */
+
+    if (colores.length > 0 && !colorElemento) {
+
+        mostrarMensaje(
+            "Seleccioná un color antes de agregar el producto.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const talle =
+        talleElemento
+            ? talleElemento.dataset.talle
+            : "";
+
+
+    const color =
+        colorElemento
+            ? colorElemento.dataset.color
+            : "";
+
+
+    const precio =
+        obtenerPrecio(producto);
+
 
     let carrito = [];
 
+
     try {
 
-        carrito = JSON.parse(
-            localStorage.getItem(
-                CLAVE_CARRITO
-            ) || "[]"
-        );
+        const carritoGuardado =
+            localStorage.getItem(CLAVE_CARRITO);
+
+
+        if (carritoGuardado) {
+
+            carrito =
+                JSON.parse(carritoGuardado);
+
+        }
+
 
         if (!Array.isArray(carrito)) {
+
             carrito = [];
+
         }
 
     } catch (error) {
@@ -860,36 +882,38 @@ function agregarAlCarrito(id) {
         );
 
         carrito = [];
+
     }
+
 
     /* =====================================================
        BUSCAR PRODUCTO IGUAL
     ===================================================== */
 
-    const existente = carrito.find(
-        item =>
+    const productoExistente =
+        carrito.find(item =>
+
             String(item.id) ===
-                String(producto.id) &&
+                String(producto.id)
+
+            &&
 
             String(item.talle || "") ===
-                String(talle || "") &&
+                String(talle)
+
+            &&
 
             String(item.color || "") ===
-                String(color || "")
-    );
+                String(color)
 
-    if (existente) {
+        );
 
-        const nuevaCantidad =
-            Number(
-                existente.cantidad || 0
-            ) + cantidad;
 
-        existente.cantidad =
-            Math.min(
-                nuevaCantidad,
-                stock
-            );
+    if (productoExistente) {
+
+        productoExistente.cantidad =
+            Number(productoExistente.cantidad || 0) +
+            cantidad;
 
     } else {
 
@@ -898,16 +922,13 @@ function agregarAlCarrito(id) {
             id: producto.id,
 
             nombre:
-                producto.nombre,
+                producto.nombre || "",
 
             precio:
-                Number(
-                    producto.precio
-                ) || 0,
+                precio,
 
             imagen:
-                obtenerImagenes(producto)[0] ||
-                "",
+                obtenerImagenPrincipal(producto),
 
             talle:
                 talle,
@@ -916,266 +937,498 @@ function agregarAlCarrito(id) {
                 color,
 
             cantidad:
-                Math.min(
-                    cantidad,
-                    stock
-                )
+                cantidad
+
         });
+
     }
 
-    /* =====================================================
-       GUARDAR
-    ===================================================== */
 
     localStorage.setItem(
         CLAVE_CARRITO,
         JSON.stringify(carrito)
     );
 
-    mostrarMensajeCarrito(
-        producto.nombre
+
+    mostrarMensaje(
+        "¡Producto agregado al carrito!",
+        "exito"
+    );
+
+
+    actualizarContadorCarrito();
+
+
+    /* =====================================================
+       CAMBIAR BOTÓN
+    ===================================================== */
+
+    const boton =
+        document.getElementById(
+            "btnAgregarCarrito"
+        );
+
+
+    if (boton) {
+
+        const textoOriginal =
+            boton.textContent;
+
+
+        boton.textContent =
+            "✓ Agregado al carrito";
+
+
+        boton.classList.add(
+            "agregado"
+        );
+
+
+        setTimeout(
+            () => {
+
+                boton.textContent =
+                    textoOriginal;
+
+                boton.classList.remove(
+                    "agregado"
+                );
+
+            },
+            1800
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR CONTADOR DEL CARRITO
+========================================================= */
+
+function actualizarContadorCarrito() {
+
+    const carrito =
+        obtenerCarrito();
+
+
+    const cantidad =
+        carrito.reduce(
+            (total, producto) =>
+                total +
+                Number(producto.cantidad || 0),
+            0
+        );
+
+
+    const elementos =
+        document.querySelectorAll(
+            ".contador-carrito"
+        );
+
+
+    elementos.forEach(
+        elemento => {
+
+            elemento.textContent =
+                cantidad;
+
+            elemento.style.display =
+                cantidad > 0
+                    ? "inline-flex"
+                    : "none";
+
+        }
     );
 }
 
+
 /* =========================================================
-   MENSAJE DE CARRITO
+   OBTENER CARRITO
 ========================================================= */
 
-function mostrarMensajeCarrito(nombre) {
+function obtenerCarrito() {
 
-    const anterior =
-        document.querySelector(
-            ".mensaje-carrito"
-        );
+    try {
 
-    if (anterior) {
-        anterior.remove();
+        const carrito =
+            localStorage.getItem(
+                CLAVE_CARRITO
+            );
+
+
+        if (!carrito) {
+            return [];
+        }
+
+
+        const datos =
+            JSON.parse(carrito);
+
+
+        return Array.isArray(datos)
+            ? datos
+            : [];
+
+    } catch (error) {
+
+        return [];
+
     }
-
-    const mensaje =
-        document.createElement("div");
-
-    mensaje.className =
-        "mensaje-carrito visible";
-
-    mensaje.innerHTML = `
-
-        <strong>
-            Producto agregado
-        </strong>
-
-        <span>
-            ${escaparHTML(nombre)}
-        </span>
-
-        <button
-            type="button"
-            onclick="window.location.href='${obtenerRutaCarrito()}'"
-        >
-            VER CARRITO
-        </button>
-
-    `;
-
-    document.body.appendChild(
-        mensaje
-    );
-
-    setTimeout(() => {
-
-        mensaje.classList.remove(
-            "visible"
-        );
-
-        setTimeout(() => {
-            mensaje.remove();
-        }, 300);
-
-    }, 4000);
 }
 
+
 /* =========================================================
-   RUTA CARRITO
+   CAMBIAR IMAGEN
 ========================================================= */
 
-function obtenerRutaCarrito() {
+function cambiarImagenProducto(
+    imagen,
+    boton
+) {
 
-    const ruta =
-        window.location.pathname;
+    const imagenPrincipal =
+        document.getElementById(
+            "imagenProductoPrincipal"
+        );
 
-    if (
-        ruta.includes("/administrador/")
-    ) {
-        return "../carrito.html";
+
+    if (!imagenPrincipal) {
+        return;
     }
 
-    return "carrito.html";
-}
 
-/* =========================================================
-   OBTENER IMÁGENES
-========================================================= */
+    imagenPrincipal.src =
+        imagen;
 
-function obtenerImagenes(producto) {
 
-    if (
-        Array.isArray(
-            producto.imagenes
+    document
+        .querySelectorAll(
+            ".producto-miniatura"
         )
-    ) {
-
-        return producto.imagenes.filter(
-            imagen =>
-                typeof imagen === "string" &&
-                imagen.trim() !== ""
+        .forEach(
+            miniatura =>
+                miniatura.classList.remove(
+                    "activa"
+                )
         );
+
+
+    if (boton) {
+
+        boton.classList.add(
+            "activa"
+        );
+
     }
+
+}
+
+
+/* =========================================================
+   OBTENER IMAGEN PRINCIPAL
+========================================================= */
+
+function obtenerImagenPrincipal(producto) {
 
     if (
         producto.imagen &&
         typeof producto.imagen === "string"
     ) {
 
-        return [
+        return producto.imagen;
+
+    }
+
+
+    if (
+        producto.imagenes &&
+        Array.isArray(producto.imagenes) &&
+        producto.imagenes.length > 0
+    ) {
+
+        return producto.imagenes[0];
+
+    }
+
+
+    if (
+        producto.fotos &&
+        Array.isArray(producto.fotos) &&
+        producto.fotos.length > 0
+    ) {
+
+        return producto.fotos[0];
+
+    }
+
+
+    return "img/sin-imagen.jpg";
+}
+
+
+/* =========================================================
+   OBTENER TODAS LAS IMÁGENES
+========================================================= */
+
+function obtenerImagenes(producto) {
+
+    let imagenes = [];
+
+
+    if (
+        producto.imagenes &&
+        Array.isArray(producto.imagenes)
+    ) {
+
+        imagenes =
+            producto.imagenes;
+
+    }
+
+
+    else if (
+        producto.fotos &&
+        Array.isArray(producto.fotos)
+    ) {
+
+        imagenes =
+            producto.fotos;
+
+    }
+
+
+    else if (
+        producto.imagen
+    ) {
+
+        imagenes = [
             producto.imagen
         ];
+
     }
+
+
+    return imagenes.filter(
+        imagen =>
+            typeof imagen === "string" &&
+            imagen.trim() !== ""
+    );
+}
+
+
+/* =========================================================
+   OBTENER PRECIO
+========================================================= */
+
+function obtenerPrecio(producto) {
+
+    const precio =
+        Number(
+            producto.precio ||
+            producto.precioVenta ||
+            producto.valor ||
+            0
+        );
+
+
+    return isNaN(precio)
+        ? 0
+        : precio;
+}
+
+
+/* =========================================================
+   OBTENER STOCK
+========================================================= */
+
+function obtenerStock(producto) {
+
+    const stock =
+        Number(
+            producto.stock ??
+            producto.cantidad ??
+            0
+        );
+
+
+    return isNaN(stock)
+        ? 0
+        : Math.max(0, stock);
+}
+
+
+/* =========================================================
+   OBTENER TALLES
+========================================================= */
+
+function obtenerTalles(producto) {
+
+    if (
+        Array.isArray(producto.talles)
+    ) {
+
+        return producto.talles
+            .map(talle => {
+
+                if (
+                    typeof talle === "object"
+                ) {
+
+                    return (
+                        talle.nombre ||
+                        talle.talle ||
+                        talle.valor ||
+                        ""
+                    );
+
+                }
+
+                return String(talle);
+
+            })
+            .filter(Boolean);
+
+    }
+
+
+    if (
+        typeof producto.talles === "string"
+    ) {
+
+        return producto.talles
+            .split(",")
+            .map(talle => talle.trim())
+            .filter(Boolean);
+
+    }
+
+
+    if (
+        Array.isArray(producto.talle)
+    ) {
+
+        return producto.talle
+            .map(talle => String(talle))
+            .filter(Boolean);
+
+    }
+
 
     return [];
 }
 
+
 /* =========================================================
-   ERROR DE IMAGEN
+   OBTENER COLORES
 ========================================================= */
 
-function imagenProductoError(imagen) {
-
-    if (!imagen) {
-        return;
-    }
-
-    imagen.style.display =
-        "none";
-
-    const contenedor =
-        imagen.parentElement;
-
-    if (!contenedor) {
-        return;
-    }
+function obtenerColores(producto) {
 
     if (
-        contenedor.querySelector(
-            ".producto-placeholder"
-        )
+        Array.isArray(producto.colores)
     ) {
-        return;
+
+        return producto.colores;
+
     }
 
-    const placeholder =
-        document.createElement(
-            "div"
-        );
-
-    placeholder.className =
-        "producto-placeholder";
-
-    placeholder.textContent =
-        "FOTO";
-
-    contenedor.appendChild(
-        placeholder
-    );
-}
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function mostrarError(mensaje) {
-
-    const contenedor =
-        document.getElementById(
-            "productoDetalle"
-        );
-
-    if (!contenedor) {
-        return;
-    }
-
-    contenedor.innerHTML = `
-
-        <div class="producto-error">
-
-            <div class="producto-error-icon">
-                !
-            </div>
-
-            <h1>
-                Producto no disponible
-            </h1>
-
-            <p>
-                ${escaparHTML(mensaje)}
-            </p>
-
-            <a
-                href="${obtenerRutaInicio()}"
-                class="btn"
-            >
-                VOLVER A LA TIENDA
-            </a>
-
-        </div>
-
-    `;
-}
-
-/* =========================================================
-   RUTA INICIO
-========================================================= */
-
-function obtenerRutaInicio() {
-
-    const ruta =
-        window.location.pathname;
 
     if (
-        ruta.includes("/administrador/")
+        typeof producto.colores === "string"
     ) {
-        return "../inicio.html";
+
+        return producto.colores
+            .split(",")
+            .map(color => color.trim())
+            .filter(Boolean);
+
     }
 
-    return "inicio.html";
+
+    if (
+        Array.isArray(producto.coloresDisponibles)
+    ) {
+
+        return producto.coloresDisponibles;
+
+    }
+
+
+    return [];
 }
 
+
 /* =========================================================
-   CATEGORÍA
+   OBTENER CÓDIGO HEX DEL COLOR
 ========================================================= */
 
-function obtenerNombreCategoria(
-    categoria
-) {
+function obtenerCodigoColor(nombre) {
 
-    const categorias = {
+    const colores = {
 
-        ninas: "Niñas",
+        rojo: "#e53935",
 
-        ninos: "Niños",
+        azul: "#1e88e5",
 
-        bebes: "Bebés",
+        celeste: "#4fc3f7",
 
-        accesorios: "Accesorios"
+        verde: "#43a047",
+
+        amarillo: "#fdd835",
+
+        naranja: "#fb8c00",
+
+        rosa: "#ec407a",
+
+        rosado: "#ec407a",
+
+        violeta: "#8e44ad",
+
+        morado: "#8e44ad",
+
+        lila: "#ce93d8",
+
+        negro: "#171717",
+
+        blanco: "#ffffff",
+
+        gris: "#9e9e9e",
+
+        marron: "#795548",
+
+        café: "#795548",
+
+        beige: "#d7ccc8",
+
+        natural: "#d7ccc8",
+
+        bordo: "#880e4f",
+
+        bordó: "#880e4f",
+
+        turquesa: "#26a69a",
+
+        dorado: "#d4af37",
+
+        plateado: "#bdbdbd"
+
     };
 
-    return (
-        categorias[categoria] ||
-        "Ropa infantil"
-    );
+
+    const clave =
+        String(nombre)
+            .toLowerCase()
+            .trim();
+
+
+    return colores[clave] || "#cccccc";
 }
 
+
 /* =========================================================
-   PRECIO
+   FORMATEAR PRECIO
 ========================================================= */
 
 function formatearPrecio(precio) {
@@ -1187,20 +1440,119 @@ function formatearPrecio(precio) {
             currency: "ARS",
             minimumFractionDigits: 0
         }
-    ).format(
-        Number(precio) || 0
-    );
+    ).format(precio);
 }
 
+
 /* =========================================================
-   SEGURIDAD HTML
+   MOSTRAR MENSAJE
 ========================================================= */
 
-function escaparHTML(texto) {
+function mostrarMensaje(
+    mensaje,
+    tipo = "info"
+) {
 
-    return String(
-        texto ?? ""
-    )
+    const elemento =
+        document.getElementById(
+            "mensajeProducto"
+        );
+
+
+    if (!elemento) {
+        return;
+    }
+
+
+    elemento.textContent =
+        mensaje;
+
+
+    elemento.className =
+        `mensaje-producto ${tipo}`;
+
+
+    clearTimeout(
+        mostrarMensaje.timeout
+    );
+
+
+    mostrarMensaje.timeout =
+        setTimeout(
+            () => {
+
+                elemento.textContent =
+                    "";
+
+                elemento.className =
+                    "mensaje-producto";
+
+            },
+            3000
+        );
+}
+
+
+/* =========================================================
+   ERROR DE PRODUCTO
+========================================================= */
+
+function mostrarErrorProducto(
+    mensaje
+) {
+
+    const contenedor =
+        document.getElementById(
+            "productoDetalle"
+        );
+
+
+    if (!contenedor) {
+        return;
+    }
+
+
+    contenedor.innerHTML = `
+
+        <div class="producto-error">
+
+            <div class="producto-error-icono">
+                😕
+            </div>
+
+            <h1>
+                Producto no encontrado
+            </h1>
+
+            <p>
+                ${escaparHTML(mensaje)}
+            </p>
+
+            <a
+                href="categoria.html"
+                class="btn-volver-tienda"
+            >
+                ← Volver a la tienda
+            </a>
+
+        </div>
+
+    `;
+}
+
+
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
+
+function escaparHTML(valor) {
+
+    if (valor === null || valor === undefined) {
+        return "";
+    }
+
+
+    return String(valor)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -1208,37 +1560,10 @@ function escaparHTML(texto) {
         .replace(/'/g, "&#039;");
 }
 
-/* =========================================================
-   SEGURIDAD ATRIBUTOS
-========================================================= */
-
-function escaparAtributo(texto) {
-
-    return String(
-        texto ?? ""
-    )
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-}
 
 /* =========================================================
-   FUNCIONES GLOBALES
+   EXPONER FUNCIÓN PARA LAS MINIATURAS
 ========================================================= */
 
-window.agregarAlCarrito =
-    agregarAlCarrito;
-
-window.imagenProductoError =
-    imagenProductoError;
-
-window.seleccionarTalle =
-    seleccionarTalle;
-
-window.seleccionarColor =
-    seleccionarColor;
-
-window.cambiarCantidad =
-    cambiarCantidad;
+window.cambiarImagenProducto =
+    cambiarImagenProducto;

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,31 +11,34 @@
     >
 
     <title>
-        Producto | Nombre de la tienda
+        CHAMAQUITOS | Ropa infantil
     </title>
+
+
+    <!-- CSS PRINCIPAL -->
 
     <link
         rel="stylesheet"
-        href="../estilos.css"
+        href="/estilos.css"
     >
 
 </head>
 
 
+
 <body>
 
 
-    <div class="topbar">
-
-        Envíos a todo el país
-        ·
-        Consultas por WhatsApp
-
-    </div>
+    <!-- =====================================================
+         ENCABEZADO
+    ====================================================== -->
 
     <header>
 
         <nav class="nav">
+
+
+            <!-- LOGO -->
 
             <a
                 href="/Inicio.html"
@@ -47,35 +49,51 @@
 
             </a>
 
+
+
+            <!-- MENÚ -->
+
             <div class="menu">
 
-                <a href="/Inicio.html">
+                <a
+                    href="/Inicio.html"
+                >
                     Inicio
                 </a>
 
 
-                <a href="Inicio.#categorias">
+                <a
+                    href="/categoria.html"
+                >
                     Categorías
                 </a>
 
 
-                <a href="inicio.html#novedades">
+                <a
+                    href="/novedades.html"
+                >
                     Novedades
                 </a>
 
 
-                <a href="inicio.html#ofertas">
+                <a
+                    href="/ofertas.html"
+                >
                     Ofertas
                 </a>
 
             </div>
 
+
+
+            <!-- ICONOS -->
+
             <div class="icons">
 
                 <button
                     type="button"
-                    id="btnBuscar"
                     aria-label="Buscar"
+                    id="btnBuscar"
                 >
                     ⌕
                 </button>
@@ -83,8 +101,8 @@
 
                 <button
                     type="button"
-                    id="btnFavoritos"
                     aria-label="Favoritos"
+                    id="btnFavoritos"
                 >
                     ♡
                 </button>
@@ -92,8 +110,8 @@
 
                 <button
                     type="button"
-                    id="btnCarrito"
                     aria-label="Carrito"
+                    id="btnCarrito"
                 >
                     🛒
                 </button>
@@ -106,68 +124,85 @@
     </header>
 
 
-    <main>
 
-        <div
-            class="producto-detalle"
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="producto-pagina">
+
+
+        <!-- BREADCRUMB -->
+
+        <div class="producto-breadcrumb">
+
+            <a href="/Inicio.html">
+                Inicio
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <span>
+                Producto
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CONTENEDOR DEL PRODUCTO
+
+             IMPORTANTE:
+             producto.js utiliza este ID.
+        ================================================== -->
+
+        <section
             id="productoDetalle"
+            class="producto-detalle"
+            aria-live="polite"
         >
+
+            <!--
+                producto.js carga automáticamente
+                todo el contenido del producto aquí.
+            -->
 
             <div class="producto-cargando">
 
-                Cargando producto...
+                <div class="producto-cargando-spinner"></div>
+
+                <p>
+                    Cargando producto...
+                </p>
 
             </div>
 
-        </div>
+        </section>
+
 
     </main>
 
-    <section class="relacionados">
-
-        <div class="section-head">
-
-            <div>
-
-                <span class="section-eyebrow">
-
-                    TAMBIÉN TE PUEDE GUSTAR
-
-                </span>
 
 
-                <h2>
-
-                    Productos relacionados
-
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="products"
-            id="productosRelacionados"
-        >
-
-        </div>
-
-    </section>
-
-
+    <!-- =====================================================
+         PIE DE PÁGINA
+    ====================================================== -->
 
     <footer>
+
 
         <div class="footer-inner">
 
 
             <div class="footer-brand">
 
+
                 <strong>
 
-                    CHAMAQUITOS
+                    NOMBRE DE LA TIENDA
 
                 </strong>
 
@@ -176,9 +211,10 @@
 
                     Ropa infantil
                     ·
-                    Tinogasta-Catamarca-Argentina
+                    Catamarca, Argentina
 
                 </p>
+
 
             </div>
 
@@ -190,22 +226,30 @@
                 <div>
 
                     <strong>
+
                         TIENDA
+
                     </strong>
 
 
-                    <a href="inicio.html#categorias">
+                    <a href="categoria.html">
+
                         Categorías
+
                     </a>
 
 
-                    <a href="inicio.html#novedades">
+                    <a href="novedades.html">
+
                         Novedades
+
                     </a>
 
 
-                    <a href="inicio.html#ofertas">
+                    <a href="ofertas.html">
+
                         Ofertas
+
                     </a>
 
                 </div>
@@ -215,22 +259,30 @@
                 <div>
 
                     <strong>
+
                         AYUDA
+
                     </strong>
 
 
                     <a href="#">
+
                         Contacto
+
                     </a>
 
 
                     <a href="#">
+
                         Envíos
+
                     </a>
 
 
                     <a href="#">
+
                         Cambios y devoluciones
+
                     </a>
 
                 </div>
@@ -240,17 +292,23 @@
                 <div>
 
                     <strong>
+
                         SEGUINOS
+
                     </strong>
 
 
-                    <a href="https://www.instagram.com/chamaquitos.ok?igsh=ejcwdTBuM2Y3cmtz">
+                    <a href="#">
+
                         Instagram
+
                     </a>
 
 
-                    <a href="">
+                    <a href="#">
+
                         WhatsApp
+
                     </a>
 
                 </div>
@@ -258,24 +316,36 @@
 
             </div>
 
+
         </div>
 
 
 
         <div class="footer-bottom">
 
+
             <p>
 
-                © 2026 chamaquitos.
+                © 2026 Nombre de la tienda.
                 Todos los derechos reservados.
 
             </p>
 
+
         </div>
+
 
     </footer>
 
-    <script src="../js/producto.js"></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DEL PRODUCTO
+    ====================================================== -->
+
+    <script
+        src="/js/producto.js"
+    ></script>
 
 
 </body>
